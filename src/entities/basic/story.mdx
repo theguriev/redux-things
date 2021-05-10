@@ -1,0 +1,173 @@
+import { useState } from 'react'
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
+import { useBasicEntity, useBasicEntity2, useFetchMoreEntity } from '.'
+
+<Meta title="Entities/Basic"/>
+
+# useBasicEntity
+
+```js
+const { data, isLoadin, refetch, fetchMore, error } = useBasicEntity({
+    initialData: useBasicEntity.initialData
+})
+```
+
+### Options
+
+The options for `useBasicEntity` are identical to the `useRequest` [hook](/?path=/docs/hooks-useRequest--page).
+
+### Returns
+
+The returned properties for `useBasicEntity` are identical to the `useRequest` [hook](/?path=/docs/hooks-useRequest--page).
+
+### Static
+
+* **.initialData()** - default initial data function. This data will be shown at the loading stage.
+
+<Canvas>
+    <Story name="initialData">
+        {() => {
+            {/* const [value, setValue] = useState('A')
+            const handleChange = e => {
+                setValue(e.target.value)
+            } */}
+            const { data, isLoading } = useBasicEntity({
+                initialData: useBasicEntity.initialData,
+                options: 'this is options'
+            })
+            return (
+                <div>
+                    {/* <button type="button" onClick={handleAdd}>Add</button>
+                    <button type="button" onClick={handleDelete}>Delete</button> */}
+                    {/* <input value={value} onChange={handleChange} /> */}
+                    <pre>{JSON.stringify(data, null, 4)}</pre>
+                </div>
+            )
+        }}
+    </Story>
+</Canvas>
+
+<Canvas>
+    <Story name="loading from the cache">
+        {() => {
+            const { data, isLoading } = useBasicEntity({
+                initialData: useBasicEntity.initialData
+            })
+            return (
+                <div>
+                    This data will be loaded from the cache.
+                    <pre>{JSON.stringify(data, null, 4)}</pre>
+                </div>
+            )
+        }}
+    </Story>
+</Canvas>
+
+<Canvas>
+    <Story name="skip">
+        {() => {
+            const { data, isLoading } = useBasicEntity({
+                initialData: 'This fetch will be skipped',
+                cache: 'no-cache',
+                skip: true
+            })
+            return (
+                <div>
+                    <pre>{JSON.stringify(data, null, 4)}</pre>
+                </div>
+            )
+        }}
+    </Story>
+</Canvas>
+
+<Canvas>
+    <Story name="dataMapper">
+        {() => {
+            const { mappedData, isLoading } = useBasicEntity({
+                dataMapper: str => str && str.toUpperCase(),
+                cache: 'no-cache',
+                options: 'this is options'
+            })
+            return (
+                <div>
+                    We can also pass a function that will change the data. 
+                    <pre>{JSON.stringify(mappedData, null, 4)}</pre>
+                </div>
+            )
+        }}
+    </Story>
+</Canvas>
+
+<Canvas>
+    <Story name="options">
+        {() => {
+            const [value, setValue] = useState('Some options')
+            const handleChange = e => {
+                setValue(e.target.value)
+            }
+            const { data, isLoading } = useBasicEntity({
+                options: value,
+                selector: (state, _options, key) => state?.[key]?.data?.endsWith(_options) ? state?.[key]?.data : null,
+                initialData: 'loading...'
+            })
+            return (
+                <div>
+                    We can pass option into fetchFn to fetch something specific.
+                    <input value={value} onChange={handleChange} />
+                    <pre>{JSON.stringify(data, null, 4)}</pre>
+                </div>
+            )
+        }}
+    </Story>
+</Canvas>
+
+<Canvas>
+    <Story name="dependent entitites">
+        {() => {
+            const { data, isLoading, isInitial } = useBasicEntity({
+                initialData: 'loading...',
+                options: 'this is options'
+            })
+            const { data: data2 } = useBasicEntity2({
+                skip: isLoading || isInitial,
+                options: data,
+            })
+            return (
+                <div>
+                    <pre>{JSON.stringify(data, null, 4)}</pre>
+                    <pre>{JSON.stringify(data2, null, 4)}</pre>
+                </div>
+            )
+        }}
+    </Story>
+</Canvas>
+
+<Canvas>
+    <Story name="fetchMore">
+        {() => {
+            const { data, isLoading, isInitial, fetchMore, canFetchMore } = useFetchMoreEntity({
+                initialData: 'loading...',
+                options: {
+                    limit: 3
+                },
+                reFetchOnWindowFocus: true,
+                getFetchMore: (current, all, { limit = 2, offset = 0 }) => {
+                    if (current.length < limit) {
+                        return false
+                    }
+                    console.log('p', current, all)
+                    return {
+                        limit,
+                        offset: offset + limit
+                    }
+                }
+            })
+            return (
+                <div>
+                    <button type="button" onClick={() => fetchMore()} disabled={!canFetchMore}>Fetch more</button>
+                    <pre>{JSON.stringify(data, null, 4)}</pre>
+                </div>
+            )
+        }}
+    </Story>
+</Canvas>
