@@ -1,6 +1,5 @@
+/* eslint-disable no-use-before-define */
 import { omit } from 'lodash-es'
-import objectHash from 'object-hash'
-import { flow } from '@/utils'
 import { ENTITIES_NAMESPACE } from '@/constants'
 
 export const defaultReducer = key => (state, { type, payload: data }) => {
@@ -33,29 +32,3 @@ export const entityReducer = key => (
     }
     return state || {}
 }
-
-const removePromiseFromCache = hash => result => {
-    cachedPromise.cache.delete(hash)
-    return result
-}
-
-export const cachedPromise = ({
-    options,
-    promiseFn,
-    onStart = () => {},
-    onSuccess = () => {},
-    onError = () => {}
-}) => {
-    const hash = objectHash(options, { unorderedObjects: true })
-    if (cachedPromise.cache.has(hash)) {
-        return cachedPromise.cache.get(hash)
-    }
-    onStart()
-    const promise = promiseFn(options)
-    cachedPromise.cache.set(hash, promise)
-    return promise
-        .then(flow(onSuccess, removePromiseFromCache(hash)))
-        .catch(onError)
-}
-
-cachedPromise.cache = new Map()

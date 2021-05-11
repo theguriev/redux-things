@@ -34,4 +34,16 @@ export const useFetchMoreEntity = props => {
     )
 }
 
+export const usePreFetchEntity = props => {
+    return useEntity(
+        KEY + 3,
+        ({ limit = 2, offset = 0 }) => {
+            console.log('FETCHING')
+            const items = Array.from({ length: 10 }).map((el, index)=> 'item-' + index)
+            return fakeFetch(items.slice(offset, offset + limit), 1000)
+        },
+        props
+    )
+}
+
 useBasicEntity.initialData = 'Initial data here, wait 1 second ✋🏻'

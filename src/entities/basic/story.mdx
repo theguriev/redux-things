@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
-import { useBasicEntity, useBasicEntity2, useFetchMoreEntity } from '.'
+import { useBasicEntity, useBasicEntity2, useFetchMoreEntity, usePreFetchEntity } from '.'
 
 <Meta title="Entities/Basic"/>
 
@@ -166,6 +166,36 @@ The returned properties for `useBasicEntity` are identical to the `useRequest` [
                 <div>
                     <button type="button" onClick={() => fetchMore()} disabled={!canFetchMore}>Fetch more</button>
                     <pre>{JSON.stringify(data, null, 4)}</pre>
+                </div>
+            )
+        }}
+    </Story>
+</Canvas>
+
+<Canvas>
+    <Story name="preFetch">
+        {() => {
+            const [skip, setSkip] = useState(true)
+            const { data, isLoading, isInitial, preFetch } = usePreFetchEntity({
+                options: {
+                    limit: 3
+                },
+                skip,
+                getFetchMore: (current, all, { limit = 2, offset = 0 }) => {
+                    if (current.length < limit) {
+                        return false
+                    }
+                    return {
+                        limit,
+                        offset: offset + limit
+                    }
+                }
+            })
+            return (
+                <div>
+                    <button type="button" onClick={() => preFetch()}>Pre fetch</button>
+                    <button type="button" onClick={() => setSkip(v => !v)}>Toggle skip</button>
+                    <pre>{JSON.stringify(skip)} | {JSON.stringify(data, null, 4)}</pre>
                 </div>
             )
         }}

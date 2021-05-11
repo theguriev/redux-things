@@ -5,9 +5,18 @@ import {
     useRef
 } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { toFunction, flow } from '@/utils'
+import {
+    toFunction,
+    flow,
+    promiseCache,
+    preFethPromise
+} from '@/utils'
 import { ENTITIES_NAMESPACE } from '@/constants'
-import { cachedPromise, defaultReducer, defaultSelector, entityReducer } from './utils'
+import {
+    defaultReducer,
+    defaultSelector,
+    entityReducer
+} from './utils'
 import { useInjectReducer } from '../useInjectReducer'
 import { useWindowFocus } from '../useWindowFocus'
 
@@ -49,9 +58,9 @@ export const useEntity = (
     const data = _cache === 'no-cache' ? null : selectedData
     const isInitial = data === null
     const isUnmounted = useRef(false)
-    const _reducer = useCallback(flow(entityReducer(key), reducer(key)), [reducer, key])
+    const internalReducer = useCallback(flow(entityReducer(key), reducer(key)), [reducer, key])
     const launch = useCallback(
-        launchOptions => cachedPromise({
+        launchOptions => promiseCache({
             options: typeof options === 'object' ? { ...launchOptions, __ENTITY_KEY__: key } : options,
             promiseFn: fetchFn,
             onStart: () => {
@@ -85,38 +94,43 @@ export const useEntity = (
                 return payload
             }
         })
-        .then(
-            payload => {
-                if (!isUnmounted.current) {
-                    setState(state => ({
-                        ...state,
-                        error: null,
-                        isLoading: false,
-                        isRefetching: false,
-                        cache: 'cache-first'
-                    }))
+            .then(
+                payload => {
+                    if (!isUnmounted.current) {
+                        setState(state => ({
+                            ...state,
+                            error: null,
+                            isLoading: false,
+                            isRefetching: false,
+                            cache: 'cache-first'
+                        }))
+                    }
+                    return payload
                 }
-                return payload
-            }
-        )
-        .catch(error => {
-            if (!error || error.name !== 'internal') {
-                if (!isUnmounted.current) {
-                    setState(state => ({
-                        ...state,
-                        error,
-                        isLoading: false,
-                        isRefetching: false,
-                        cache: 'cache-first'
-                    }))
+            )
+            .catch(catchedError => {
+                if (!catchedError) {
+                    if (!isUnmounted.current) {
+                        setState(state => ({
+                            ...state,
+                            error: catchedError,
+                            isLoading: false,
+                            isRefetching: false,
+                            cache: 'cache-first'
+                        }))
+                    }
+                    return catchedError
                 }
-                return error
-            }
-        }),
+            }),
         [fetchFn, getFetchMore, selectedData, setState]
     )
 
     const reFetch = useCallback(() => launch({ ...options, isRefetch: true }), [options])
+    const preFetch = useCallback((extendOptions = {}) => preFethPromise({
+        options: typeof options === 'object' ? { ...options, __ENTITY_KEY__: key, ...extendOptions } : options,
+        promiseFn: fetchFn
+    }), [options])
+
     const fetchMore = useCallback(
         newOptions => {
             if (canFetchMore === false) {
@@ -147,7 +161,7 @@ export const useEntity = (
     const raw = data || initialDataFn(options)
     const mappedData = dataMapper(raw, { isLoading, isRefetching, isInitial })
 
-    useInjectReducer(key, _reducer)
+    useInjectReducer(key, internalReducer)
 
     useEffect(() => {
         isUnmounted.current = false
@@ -172,6 +186,7 @@ export const useEntity = (
         mappedData,
         reFetch,
         fetchMore,
+        preFetch,
         canFetchMore
     }
 }
