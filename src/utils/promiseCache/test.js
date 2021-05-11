@@ -1,4 +1,7 @@
-import { promiseCache, preFethPromise, cache, preFetchCache } from '.'
+/* eslint-disable prefer-promise-reject-errors */
+import {
+    promiseCache, preFethPromise, cache, preFetchCache
+} from '.'
 
 const options = { abc: 123 }
 const resolvedData = 'resolved data'

@@ -62,7 +62,7 @@ describe('useEntity', () => {
                 'EInitialDataEntity',
                 () => Promise.resolve('Not initial anymore 🙃'),
                 {
-                    initialData: ({ length = 5 }) => Array.from({ length }).map(el => 'A'),
+                    initialData: ({ length = 5 }) => Array.from({ length }).map(() => 'A'),
                     options: {
                         length: 2
                     }
@@ -81,9 +81,7 @@ describe('useEntity', () => {
                 () => Promise.resolve([2, 4, 8]),
                 {
                     initialData: [],
-                    dataMapper: (data) => {
-                        return data.map(el => el * 2)
-                    }
+                    dataMapper: data => data.map(el => el * 2)
                 }
             ),
             { wrapper }
@@ -98,7 +96,7 @@ describe('useEntity', () => {
             () => useEntity(
                 'EMultiFetchingEntity',
                 () => {
-                    counter++
+                    counter += 1
                     return Promise.resolve(counter)
                 },
                 {
@@ -111,7 +109,7 @@ describe('useEntity', () => {
             () => useEntity(
                 'EMultiFetchingEntity',
                 () => {
-                    counter++
+                    counter += 1
                     return Promise.resolve(counter)
                 },
                 {
@@ -124,7 +122,7 @@ describe('useEntity', () => {
             () => useEntity(
                 'EMultiFetchingEntity',
                 () => {
-                    counter++
+                    counter += 1
                     return Promise.resolve(counter)
                 },
                 {

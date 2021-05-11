@@ -38,8 +38,8 @@ export const useMutation = (
                 }
             )
             .catch(
-                error => {
-                    setState(state => ({ ...state, error }))
+                catchedError => {
+                    setState(state => ({ ...state, error: catchedError }))
                     return error
                 }
             )

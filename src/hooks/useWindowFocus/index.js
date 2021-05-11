@@ -12,15 +12,15 @@ export const getEventName = () => {
 
 export const EVENT_NAME = getEventName()
 
-const _hasFocus = () => document.visibilityState === 'visible'
+const hasFocusFn = () => document.visibilityState === 'visible'
 
 export const useWindowFocus = (skip = false) => {
     const [state, setState] = useState({
-        hasFocus: _hasFocus(),
+        hasFocus: hasFocusFn(),
         isFirstTime: true
     })
     const handleFocus = () => setState({
-        hasFocus: _hasFocus(),
+        hasFocus: hasFocusFn(),
         isFirstTime: false
     })
 

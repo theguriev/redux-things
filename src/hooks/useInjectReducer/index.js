@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { useEffect } from 'react'
 import { useStore } from 'react-redux'
 import { omit } from 'lodash-es'
