@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`useEntity basic scenario 1`] = `
+exports[`useThing basic scenario 1`] = `
 Array [
   Object {
     "canFetchMore": false,
@@ -57,7 +57,7 @@ Array [
 ]
 `;
 
-exports[`useEntity reFetch feature 1`] = `
+exports[`useThing reFetch feature 1`] = `
 Array [
   Object {
     "canFetchMore": false,

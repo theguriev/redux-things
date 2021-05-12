@@ -1,11 +1,11 @@
 import { renderHook, act } from '@testing-library/react-hooks'
 import { reduxContextProvider as wrapper } from '@/mocks'
-import { useEntity } from '.'
+import { useThing } from '.'
 
-describe('useEntity', () => {
+describe('useThing', () => {
     test('basic scenario', async () => {
         const { result, waitForValueToChange } = renderHook(
-            () => useEntity(
+            () => useThing(
                 'EWhateverEntity',
                 () => Promise.resolve('hello world')
             ),
@@ -20,7 +20,7 @@ describe('useEntity', () => {
 
     test('getting from the cache', async () => {
         const { result } = renderHook(
-            () => useEntity(
+            () => useThing(
                 'EWhateverEntity',
                 () => Promise.resolve('NEVER')
             ),
@@ -34,7 +34,7 @@ describe('useEntity', () => {
 
     test('dependend queries', async () => {
         const { result, waitForValueToChange } = renderHook(
-            () => useEntity(
+            () => useThing(
                 'EDependendEntity1',
                 () => Promise.resolve('Cool, isn\'t it? 🙂')
             ),
@@ -42,7 +42,7 @@ describe('useEntity', () => {
         )
         await waitForValueToChange(() => result.current.isLoading)
         const { result: result2 } = renderHook(
-            () => useEntity(
+            () => useThing(
                 'EDependendEntity2',
                 options => Promise.resolve(`This text is passed through options from dependent entity "${options}"`),
                 {
@@ -58,7 +58,7 @@ describe('useEntity', () => {
 
     test('initialData feature', async () => {
         const { result, waitForValueToChange } = renderHook(
-            () => useEntity(
+            () => useThing(
                 'EInitialDataEntity',
                 () => Promise.resolve('Not initial anymore 🙃'),
                 {
@@ -76,7 +76,7 @@ describe('useEntity', () => {
 
     test('dataMapper feature', async () => {
         const { result, waitForValueToChange } = renderHook(
-            () => useEntity(
+            () => useThing(
                 'EDataMapper',
                 () => Promise.resolve([2, 4, 8]),
                 {
@@ -93,7 +93,7 @@ describe('useEntity', () => {
     test('prevent multi fetching', async () => {
         let counter = 0
         const { result, waitForValueToChange } = renderHook(
-            () => useEntity(
+            () => useThing(
                 'EMultiFetchingEntity',
                 () => {
                     counter += 1
@@ -106,7 +106,7 @@ describe('useEntity', () => {
             { wrapper }
         )
         const { result: result2 } = renderHook(
-            () => useEntity(
+            () => useThing(
                 'EMultiFetchingEntity',
                 () => {
                     counter += 1
@@ -119,7 +119,7 @@ describe('useEntity', () => {
             { wrapper }
         )
         const { result: result3 } = renderHook(
-            () => useEntity(
+            () => useThing(
                 'EMultiFetchingEntity',
                 () => {
                     counter += 1
@@ -141,7 +141,7 @@ describe('useEntity', () => {
     test('fetchMore feature', async () => {
         const MAX_ITEMS = 10
         const reducer = key => (state, { type, payload: data }) => {
-            if (type === `${useEntity.NAMESPACE}/${key}/fulfilled`) {
+            if (type === `${useThing.NAMESPACE}/${key}/fulfilled`) {
                 return {
                     ...state,
                     data: [
@@ -153,7 +153,7 @@ describe('useEntity', () => {
             return state || {}
         }
         const { result, waitForValueToChange } = renderHook(
-            () => useEntity(
+            () => useThing(
                 'EFetchMoreEntity',
                 ({ limit, offset }) => Promise.resolve(
                     Array
@@ -192,7 +192,7 @@ describe('useEntity', () => {
 
     test('reFetch feature', async () => {
         const { result, waitForValueToChange } = renderHook(
-            () => useEntity(
+            () => useThing(
                 'ERefetchEntity',
                 () => Promise.resolve('hello world')
             ),

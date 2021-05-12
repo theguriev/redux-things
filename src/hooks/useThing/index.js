@@ -20,7 +20,7 @@ import {
 import { useInjectReducer } from '../useInjectReducer'
 import { useWindowFocus } from '../useWindowFocus'
 
-export const useEntity = (
+export const useThing = (
     key,
     fetchFn,
     {
@@ -191,4 +191,4 @@ export const useEntity = (
     }
 }
 
-useEntity.NAMESPACE = ENTITIES_NAMESPACE
+useThing.NAMESPACE = ENTITIES_NAMESPACE

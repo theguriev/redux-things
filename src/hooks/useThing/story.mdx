@@ -1,16 +1,16 @@
 import { useState } from 'react'
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 
-<Meta title="Hooks/useEntity"/>
+<Meta title="Hooks/useThing"/>
 
-# useEntity
+# useThing
 
 This is the basic hook on which we plan to build all our future hooks. But this does not mean that it cannot be used directly. Here's a simple example of how you can use it:
 
 ```js
 const fetchFn = () => fetch('/something')
 
-const { isLoading, data, fetchMore, canFetchMore } = useEntity(
+const { isLoading, data, fetchMore, canFetchMore } = useThing(
     'ESomething',
     fetchFn,
     props
