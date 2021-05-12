@@ -1,8 +1,7 @@
 import {
     useEffect,
     useState,
-    useCallback,
-    useRef
+    useCallback
 } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {

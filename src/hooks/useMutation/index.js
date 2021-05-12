@@ -1,7 +1,8 @@
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import { createAsyncThunkWithError, promiseCache } from '@/utils'
+import { promiseCache } from '@/utils'
 import { ENTITIES_NAMESPACE } from '@/constants'
+import { useMounted } from '../useMounted'
 
 export const useMutation = (
     promiseFn,
@@ -13,9 +14,11 @@ export const useMutation = (
         { isLoading, error, data },
         setState
     ] = useState({ error: null, isLoading: false, data: null })
+
+    const mountedRef = useMounted()
     const dispatch = useDispatch()
 
-    const launch = useCallback(
+    const mutate = useCallback(
         (launchOptions = {}) => promiseCache({
             options: { ...launchOptions, __ENTITY_KEY__: mutationKey },
             promiseFn,
@@ -26,38 +29,33 @@ export const useMutation = (
                 })
                 setState(state => ({
                     ...state,
-                    isLoading: true,
-                    isRefetching: !!launchOptions?.isRefetch
+                    isLoading: true
                 }))
             },
             onSuccess: payload => {
                 dispatch({
                     type: `${ENTITIES_NAMESPACE}/mutate/${mutationKey}/fulfilled`,
                     payload,
-                    fetchMoreOptions: generatedFMOptions,
-                    canFetchMore: !!generatedFMOptions,
-                    key
+                    key: mutationKey
                 })
                 return payload
             },
             onError: payload => {
                 dispatch({
-                    type: `${ENTITIES_NAMESPACE}/${key}/error`,
+                    type: `${ENTITIES_NAMESPACE}/mutate/${mutationKey}/error`,
                     payload,
-                    key
+                    key: mutationKey
                 })
                 return payload
             }
         })
             .then(
                 payload => {
-                    if (!isUnmounted.current) {
+                    if (mountedRef.current) {
                         setState(state => ({
                             ...state,
                             error: null,
-                            isLoading: false,
-                            isRefetching: false,
-                            cache: 'cache-first'
+                            isLoading: false
                         }))
                     }
                     return payload
@@ -65,54 +63,22 @@ export const useMutation = (
             )
             .catch(catchedError => {
                 if (!catchedError) {
-                    if (!isUnmounted.current) {
+                    if (mountedRef.current) {
                         setState(state => ({
                             ...state,
                             error: catchedError,
-                            isLoading: false,
-                            isRefetching: false,
-                            cache: 'cache-first'
+                            isLoading: false
                         }))
                     }
                     return catchedError
                 }
             }),
-        [fetchFn, getFetchMore, selectedData, setState]
+        [promiseFn, mutationKey, setState]
     )
-
-    const action = useMemo(
-        () => createAsyncThunkWithError(
-            `${mutationKey}`,
-            (options, extra) => mutationFn({ options, ...extra })
-                .then(
-                    res => ({
-                        data: res,
-                        options
-                    })
-                )
-        ),
-        [mutationFn, mutationKey]
-    )
-
-    const mutate = useCallback(options => {
-        setState(state => ({ ...state, isLoading: true }))
-        return dispatch(action(options))
-            .then(
-                res => {
-                    setState(state => ({ ...state, isLoading: false, data: res }))
-                    return res
-                }
-            )
-            .catch(
-                catchedError => {
-                    setState(state => ({ ...state, error: catchedError }))
-                    return error
-                }
-            )
-    }, [action])
 
     return {
         isLoading,
+        isError: !!error,
         error,
         data,
         mutate
