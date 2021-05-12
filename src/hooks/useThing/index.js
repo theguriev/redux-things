@@ -18,6 +18,7 @@ import {
     entityReducer
 } from './utils'
 import { useInjectReducer } from '../useInjectReducer'
+import { useMounted } from '../useMounted'
 import { useWindowFocus } from '../useWindowFocus'
 
 export const useThing = (
@@ -57,7 +58,7 @@ export const useThing = (
     const selectedData = useSelector(state => selector(state, options, key))
     const data = _cache === 'no-cache' ? null : selectedData
     const isInitial = data === null
-    const isUnmounted = useRef(false)
+    const mountedRef = useMounted()
     const internalReducer = useCallback(flow(entityReducer(key), reducer(key)), [reducer, key])
     const launch = useCallback(
         launchOptions => promiseCache({
@@ -96,7 +97,7 @@ export const useThing = (
         })
             .then(
                 payload => {
-                    if (!isUnmounted.current) {
+                    if (mountedRef.current) {
                         setState(state => ({
                             ...state,
                             error: null,
@@ -110,7 +111,7 @@ export const useThing = (
             )
             .catch(catchedError => {
                 if (!catchedError) {
-                    if (!isUnmounted.current) {
+                    if (mountedRef.current) {
                         setState(state => ({
                             ...state,
                             error: catchedError,
@@ -162,13 +163,6 @@ export const useThing = (
     const mappedData = dataMapper(raw, { isLoading, isRefetching, isInitial })
 
     useInjectReducer(key, internalReducer)
-
-    useEffect(() => {
-        isUnmounted.current = false
-        return () => {
-            isUnmounted.current = true
-        }
-    }, [])
 
     useEffect(() => {
         if (reFetchOnWindowFocus && hasFocus && !isFirstTime) {

@@ -1,4 +1,5 @@
 export * from './useMutation'
+export * from './useMounted'
 export * from './useThing'
 export * from './useInjectReducer'
 export * from './useWindowFocus'
