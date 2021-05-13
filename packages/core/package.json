@@ -1,7 +1,7 @@
 {
     "name": "@redux-things/core",
     "version": "1.2.0",
-    "description": "",
+    "description": "A library that allows you to quickly and easily synchronize your store with the server.",
     "main": "dist/index.js",
     "scripts": {
         "build": "node build.js",

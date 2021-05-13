@@ -3,7 +3,7 @@ import Logo from './logo.png'
 
 export default create({
     base: 'light',
-    brandTitle: 'My custom storybook',
-    brandUrl: 'https://example.com',
+    brandTitle: 'A library that allows you to quickly and easily synchronize your store with the server',
+    brandUrl: 'https://github.com/theguriev/redux-things',
     brandImage: Logo
 })

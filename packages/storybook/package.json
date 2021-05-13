@@ -1,7 +1,7 @@
 {
     "name": "@redux-things/storybook",
     "version": "1.2.0",
-    "description": "",
+    "description": "A library that allows you to quickly and easily synchronize your store with the server",
     "scripts": {
         "start": "start-storybook -p 6006 --no-manager-cache",
         "storybook-docs": "start-storybook --docs --no-manager-cache",
