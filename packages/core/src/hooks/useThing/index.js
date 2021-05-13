@@ -4,6 +4,7 @@ import {
     useCallback
 } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useInterval } from 'react-use'
 import {
     toFunction,
     flow,
@@ -32,7 +33,9 @@ export const useThing = (
         skip = false,
         cache = 'cache-first',
         options: externalOptions = null,
-        reFetchOnWindowFocus = false
+        reFetchOnWindowFocus = false,
+        refetchInterval = null,
+        refetchIntervalInBackground = false
     } = {}
 ) => {
     const { hasFocus, isFirstTime } = useWindowFocus(!reFetchOnWindowFocus)
@@ -160,6 +163,16 @@ export const useThing = (
 
     const raw = data || initialDataFn(options)
     const mappedData = dataMapper(raw, { isLoading, isRefetching, isInitial })
+    const refetchIntervalFn = useCallback(
+        () => {
+            if (hasFocus || refetchIntervalInBackground) {
+                refetch()
+            }
+        },
+        [hasFocus, refetchIntervalInBackground]
+    )
+
+    useInterval(refetchIntervalFn, refetchInterval)
 
     useInjectReducer(key, internalReducer)
 
