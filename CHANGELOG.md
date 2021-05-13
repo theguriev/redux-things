@@ -1,0 +1,14 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.1.1 (2021-05-13)
+
+
+### Features
+
+* **Hooks:** add useMounted ([3e958ee](https://github.com/theguriev/redux-things/commit/3e958ee42e5950df90e407afa66d117ad89a220c))
+* **Logo:** add hacky logo ([5f73e7d](https://github.com/theguriev/redux-things/commit/5f73e7d5d32319196a1af41a5c032e0c1633a41e))
+* add eslint ([efd09a9](https://github.com/theguriev/redux-things/commit/efd09a960bfd3fa7488c2965cf122a1e904b68de))
+* add standard version ([ce50aea](https://github.com/theguriev/redux-things/commit/ce50aea9e8f8f1d848f8a80a23aba947a148d4af))
