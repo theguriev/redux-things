@@ -4,9 +4,9 @@
     "description": "",
     "main": "dist/index.js",
     "scripts": {
-        "build": "cat logo.txt && node build.js",
+        "build": "node build.js",
         "lint": "npx eslint --ignore-path .gitignore .",
-        "test": "cat logo.txt && jest",
+        "test": "jest",
         "test:watch": "jest --watchAll"
     },
     "author": "Eugen Guriev",

@@ -7,10 +7,10 @@
     "author": "Eugen Guriev",
     "license": "MIT",
     "scripts": {
-        "test": "lerna run test --parallel",
+        "test": "cat logo.txt && lerna run test --parallel",
         "test:watch": "lerna run test --parallel -- --collect-coverage=false --watch",
-        "release": "lerna version --conventional-commits --conventional-graduate --yes",
-        "bootstrap": "lerna bootstrap"
+        "release": "cat logo.txt && lerna version --conventional-commits --yes",
+        "bootstrap": "cat logo.txt && lerna bootstrap"
     },
     "devDependencies": {
         "lerna": "^4.0.0"
