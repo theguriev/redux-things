@@ -3,7 +3,8 @@
     "version": "1.1.1",
     "description": "",
     "scripts": {
-        "start": "start-storybook -p 6006",
+        "start": "start-storybook -p 6006 --no-manager-cache",
+        "storybook-docs": "start-storybook --docs --no-manager-cache",
         "build": "build-storybook"
     },
     "author": "Eugen Guriev",
@@ -52,5 +53,10 @@
         "react-redux": "^7.2.2",
         "react-use": "^17.1.1",
         "redux": "^4.1.0"
+    },
+    "dependencies": {
+        "@cryptic-css/core": "^5.0.3",
+        "@you-eye/styled": "^5.0.3",
+        "styled-components": "^5.3.0"
     }
 }

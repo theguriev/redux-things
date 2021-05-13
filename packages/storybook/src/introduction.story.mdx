@@ -1,0 +1,21 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+import Logo from '@/assets/logo.png'
+import { Ui } from '@you-eye/styled'
+
+<Meta title="Introduction" />
+
+<Ui
+    justifyContent="center"
+    display="flex"
+    marginBottom={55}
+>
+    <img src={Logo} alt="Logo" width="555" />
+</Ui>
+
+A library that allows you to quickly and easily synchronize your store with the server.
+
+## Why use redux-things?
+
+* **It's easy and fast:** Writing your data fetching logic by hand is over. Tell Redux Things where to get your data and how fresh you need it to be and the rest is automatic. Redux Things handles caching, background updates and stale data out of the box with almost zero-configuration. If you know how to work with promises or async/await, then you already know how to use Redux Things. Simply pass a function that resolves your data (or throws an error) and the rest is history.
+* **Easy integration:** All your previous legacy stuff will work as it was before. Nothing new. So, you do not need to demolish the house when the roof is leaking. There's no magic here, just middleware, actions, selectors, and async reducers.
+* **It's extensible:** Built to fit most use cases out-of-the-box, but can easily be extended with custom Redux middleware, sagas, UI integrations, network interfaces, etc.
