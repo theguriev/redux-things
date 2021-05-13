@@ -1,5 +1,4 @@
-import { useThing } from '@/hooks'
-import { fakeFetch } from '@/utils'
+import { useThing, fakeFetch } from '@redux-things/core'
 import { KEY } from './constants'
 
 export const useBasicEntity = props => useThing(

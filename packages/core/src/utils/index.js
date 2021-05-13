@@ -1,5 +1,3 @@
-export { generateRandomName } from './generateRandomName'
-export { default as createAsyncThunkWithError } from './createAsyncThunkWithError'
 export * from './function'
 export * from './dictionaryReducer'
 export * from './flow'

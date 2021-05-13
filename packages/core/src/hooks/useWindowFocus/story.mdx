@@ -1,0 +1,34 @@
+import { useState } from 'react'
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
+import { useWindowFocus } from '.'
+
+<Meta title="Hooks/useWindowFocus"/>
+
+# useWindowFocus
+
+Returns true if the window has focus, false if not.
+
+```js
+const hasFocus = useWindowFocus()
+```
+
+### Properties
+* `skip: boolean` - Set this to **true** to disable event listening.
+
+<Canvas>
+    <Story name="Default">
+        {() => {
+            const hasFocus = useWindowFocus()
+            console.log('hasFocus', hasFocus)
+            return (
+                <div>
+                    <pre>
+                        Switch to another tab and switch back ( keep your console open ).
+                        <br />
+                        Has focus: <b>{JSON.stringify(hasFocus, null, 4)}</b>
+                    </pre>
+                </div>
+            )
+        }}
+    </Story>
+</Canvas>

@@ -1,14 +1,10 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { applyMiddleware, createStore } from 'redux'
-import { setupAsyncReducers } from '@/hooks'
+import { createStore } from 'redux'
+import { setupAsyncReducers } from '@redux-things/core'
 
 export const parameters = {
     actions: { argTypesRegex: "^on[A-Z].*" },
-}
-
-window.__MIND_MAPS__ = window.__MIND_MAPS__ || {
-    url: 'http://localhost/mm/wp-json/mmb/'
 }
 
 const store = setupAsyncReducers(

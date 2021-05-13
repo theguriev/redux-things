@@ -1,93 +1,18 @@
 {
-    "name": "@bottle/redux-entities",
-    "version": "1.1.0",
-    "description": "",
-    "main": "dist/index.js",
-    "scripts": {
-        "start": "cat logo.txt && start-storybook -p 6006",
-        "build-storybook": "build-storybook",
-        "build": "node scripts/build.js",
-        "lint": "npx eslint --ignore-path .gitignore .",
-        "test": "cat logo.txt && jest",
-        "test:watch": "jest --watchAll",
-        "release": "standard-version"
-    },
+    "name": "redux-things",
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
     "author": "Eugen Guriev",
     "license": "MIT",
-    "babel": {
-        "plugins": [
-            [
-                "module-resolver",
-                {
-                    "root": [
-                        "./src"
-                    ],
-                    "alias": {
-                        "@": "./src"
-                    }
-                }
-            ],
-            "dynamic-import-node",
-            "add-module-exports"
-        ],
-        "presets": [
-            [
-                "@babel/preset-env",
-                {
-                    "targets": {
-                        "chrome": 78,
-                        "edge": 15,
-                        "esmodules": false
-                    }
-                }
-            ],
-            "@babel/preset-react"
-        ]
-    },
-    "dependencies": {
-        "@reduxjs/toolkit": "^1.5.0",
-        "core-js": "^2.6.12",
-        "lodash-es": "^4.17.15",
-        "object-hash": "^2.1.1",
-        "prop-types": "^15.7.2",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-query": "^3.16.0",
-        "react-redux": "^7.2.4",
-        "react-use": "^17.2.4"
+    "scripts": {
+        "test": "lerna run test --parallel",
+        "test:watch": "lerna run test --parallel -- --collect-coverage=false --watch",
+        "release": "lerna version --conventional-commits --conventional-graduate --yes",
+        "bootstrap": "lerna bootstrap"
     },
     "devDependencies": {
-        "@babel/cli": "^7.11.6",
-        "@babel/core": "^7.11.6",
-        "@babel/plugin-transform-modules-commonjs": "^7.13.8",
-        "@babel/preset-env": "^7.11.5",
-        "@babel/preset-react": "^7.10.4",
-        "@storybook/addon-actions": "^6.1.21",
-        "@storybook/addon-essentials": "^6.1.21",
-        "@storybook/addon-links": "^6.1.21",
-        "@storybook/react": "^6.1.21",
-        "@svgr/webpack": "^5.4.0",
-        "@testing-library/react-hooks": "^5.1.2",
-        "babel-jest": "^26.6.3",
-        "babel-loader": "^8.1.0",
-        "babel-plugin-add-module-exports": "^1.0.4",
-        "babel-plugin-dynamic-import-node": "^2.3.3",
-        "babel-plugin-module-resolver": "^4.0.0",
-        "clean-webpack-plugin": "^3.0.0",
-        "copy-dir": "^1.3.0",
-        "eslint-config-airbnb": "^18.2.1",
-        "eslint-plugin-jest": "^24.3.6",
-        "eslint-plugin-react": "^7.23.2",
-        "jest": "^26.6.3",
-        "standard-version": "^9.3.0",
-        "ts-jest": "^26.5.5"
-    },
-    "peerDependencies": {
-        "prop-types": "^15.7.2",
-        "react": "^17.0.0",
-        "react-dom": "^17.0.0",
-        "react-query": "^2.25.2",
-        "react-redux": "^7.2.2",
-        "react-use": "^17.1.1"
+        "lerna": "^4.0.0"
     }
 }
