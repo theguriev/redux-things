@@ -55,6 +55,7 @@ export const useMutation = (
                         setState(state => ({
                             ...state,
                             error: null,
+                            data: payload,
                             isLoading: false
                         }))
                     }

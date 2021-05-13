@@ -16,8 +16,9 @@ module.exports = {
     moduleNameMapper: {
         "^lodash-es$": "lodash"
     },
+    modulePathIgnorePatterns: ["<rootDir>/dist/"],
     testRegex: '\\.?(test|tests|spec|integration)\\.[jt]sx?$',
     collectCoverage: false,
     verbose: true,
-    collectCoverageFrom: ['**/*.js'],
+    collectCoverageFrom: ['**/*.js']
 }

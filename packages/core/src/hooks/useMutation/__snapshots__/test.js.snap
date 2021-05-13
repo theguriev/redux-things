@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useMutation basic mutation 1`] = `
+Array [
+  Object {
+    "data": null,
+    "error": null,
+    "isError": false,
+    "isLoading": false,
+    "mutate": [Function],
+  },
+  Object {
+    "data": null,
+    "error": null,
+    "isError": false,
+    "isLoading": true,
+    "mutate": [Function],
+  },
+  Object {
+    "data": "Here we will send some data to the server 😇 TEST OPTIONS",
+    "error": null,
+    "isError": false,
+    "isLoading": false,
+    "mutate": [Function],
+  },
+]
+`;
