@@ -4,8 +4,7 @@
     "description": "",
     "scripts": {
         "start": "start-storybook -p 6006",
-        "build-storybook": "build-storybook",
-        "build": "node scripts/build.js"
+        "build": "build-storybook"
     },
     "author": "Eugen Guriev",
     "license": "MIT",

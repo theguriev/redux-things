@@ -10,7 +10,8 @@
         "test": "cat logo.txt && lerna run test --parallel",
         "test:watch": "lerna run test --parallel -- --collect-coverage=false --watch",
         "release": "cat logo.txt && lerna version --conventional-commits --yes",
-        "bootstrap": "cat logo.txt && lerna bootstrap"
+        "bootstrap": "cat logo.txt && lerna bootstrap",
+        "build": "cat logo.txt && lerna run build"
     },
     "devDependencies": {
         "lerna": "^4.0.0"
