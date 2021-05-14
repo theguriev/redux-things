@@ -9,7 +9,7 @@
         "test": "jest",
         "test:watch": "jest --watchAll"
     },
-    "author": "Eugen Guriev",
+    "author": "Eugen Guriev <gurievcreative@gmail.com>",
     "license": "MIT",
     "babel": {
         "plugins": [
@@ -93,5 +93,6 @@
     "repository": {
         "type": "git",
         "url": "git+https://github.com/theguriev/redux-things.git"
-    }
+    },
+    "gitHead": "de8576d016692eecfd2e6322a0403ed3690b77ca"
 }

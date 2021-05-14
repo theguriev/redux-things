@@ -1,6 +1,6 @@
 {
     "name": "redux-things",
-    "private": true,
+    "private": false,
     "workspaces": [
         "packages/*"
     ],
