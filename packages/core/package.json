@@ -11,6 +11,9 @@
     },
     "author": "Eugen Guriev",
     "license": "MIT",
+    "publishConfig": {
+        "access": "public"
+    },
     "babel": {
         "plugins": [
             [
@@ -94,5 +97,5 @@
         "type": "git",
         "url": "git+https://github.com/theguriev/redux-things.git"
     },
-    "gitHead": "fde27874d02b26b828b2ffaf9f5ece4c224ad057"
+    "gitHead": "65fd2245c2b3ed434293e0991dc7a8862fef7dda"
 }
