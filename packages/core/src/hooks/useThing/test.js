@@ -44,7 +44,7 @@ describe('useThing', () => {
         const { result: result2 } = renderHook(
             () => useThing(
                 'EDependendEntity2',
-                options => Promise.resolve(`This text is passed through options from dependent entity "${options}"`),
+                ({ options }) => Promise.resolve(`This text is passed through options from dependent entity "${options}"`),
                 {
                     skip: result.current.isLoading || result.current.isInitial,
                     options: result.current.data
@@ -155,7 +155,7 @@ describe('useThing', () => {
         const { result, waitForValueToChange } = renderHook(
             () => useThing(
                 'EFetchMoreEntity',
-                ({ limit, offset }) => Promise.resolve(
+                ({ options: { limit, offset } }) => Promise.resolve(
                     Array
                         .from({ length: 10 })
                         .map((_, index) => index)

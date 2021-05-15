@@ -4,7 +4,7 @@ import {
     useCallback,
 } from 'react'
 import { partialRight } from 'lodash-es'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useStore } from 'react-redux'
 import { useInterval } from 'react-use'
 import {
     toFunction,
@@ -35,9 +35,9 @@ export const useThing = (
         options: externalOptions,
         reFetchOnWindowFocus,
         refetchInterval,
-        refetchIntervalInBackground
+        refetchIntervalInBackground,
+        ...extra
     } = useThingsContext(hookOptions)
-
     const { hasFocus, isFirstTime } = useWindowFocus(!reFetchOnWindowFocus)
     const canFetchMore = useSelector(state => !!state?.[key]?.canFetchMore)
     const fetchMoreOptions = useSelector(state => state?.[key]?.fetchMoreOptions)
@@ -55,7 +55,7 @@ export const useThing = (
         cache,
         options: fetchMoreOptions || externalOptions
     })
-    const dispatch = useDispatch()
+    const { dispatch, getStore } = useStore()
     const initialDataFn = toFunction(initialData)
     const selectedData = useSelector(state => selector(state, options, key))
     const data = _cache === 'no-cache' ? null : selectedData
@@ -68,7 +68,12 @@ export const useThing = (
     const launch = useCallback(
         launchOptions => promiseCache({
             options: typeof options === 'object' ? { ...launchOptions, __ENTITY_KEY__: key } : options,
-            promiseFn: fetchFn,
+            promiseFn: fetchOptions => fetchFn({
+                options: fetchOptions,
+                dispatch,
+                getStore,
+                extra
+            }),
             onStart: () => {
                 dispatch({
                     type: `${NAMESPACE}/${key}/pending`,
