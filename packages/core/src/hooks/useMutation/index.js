@@ -3,13 +3,18 @@ import { useDispatch } from 'react-redux'
 import { promiseCache } from '@/utils'
 import { NAMESPACE } from '@/constants'
 import { useMounted } from '../useMounted'
+import { useMutationContext } from '../useMutationContext'
 
 export const useMutation = (
     promiseFn,
-    {
-        mutationKey = 'global'
-    } = {}
+    hookOptions = {}
 ) => {
+    const {
+        mutationKey,
+        onStart,
+        onSuccess,
+        onError
+    } = useMutationContext(hookOptions)
     const [
         { isLoading, error, data },
         setState
@@ -31,9 +36,18 @@ export const useMutation = (
                     ...state,
                     isLoading: true
                 }))
+                onStart({
+                    type: `${NAMESPACE}/mutate/${mutationKey}/pending`,
+                    key: mutationKey
+                })
             },
             onSuccess: payload => {
                 dispatch({
+                    type: `${NAMESPACE}/mutate/${mutationKey}/fulfilled`,
+                    payload,
+                    key: mutationKey
+                })
+                onSuccess({
                     type: `${NAMESPACE}/mutate/${mutationKey}/fulfilled`,
                     payload,
                     key: mutationKey
@@ -42,6 +56,11 @@ export const useMutation = (
             },
             onError: payload => {
                 dispatch({
+                    type: `${NAMESPACE}/mutate/${mutationKey}/error`,
+                    payload,
+                    key: mutationKey
+                })
+                onError({
                     type: `${NAMESPACE}/mutate/${mutationKey}/error`,
                     payload,
                     key: mutationKey

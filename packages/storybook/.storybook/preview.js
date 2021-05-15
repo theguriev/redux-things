@@ -4,7 +4,11 @@ import { createStore } from 'redux'
 import { setupAsyncReducers, ThingsContext } from '@redux-things/core'
 
 export const parameters = {
-    actions: { argTypesRegex: "^on[A-Z].*" },
+    options: {
+        storySort: {
+            order: ['Getting Started', ['Introduction', 'Installation']],
+        }
+    }
 }
 
 const store = setupAsyncReducers(
