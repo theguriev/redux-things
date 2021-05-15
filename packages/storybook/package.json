@@ -6,7 +6,7 @@
         "start": "start-storybook -p 6006 --no-manager-cache",
         "storybook": "start-storybook -p 6006",
         "storybook-docs": "start-storybook --docs --no-manager-cache",
-        "build": "build-storybook"
+        "build": "build-storybook --docs -o ../../docs"
     },
     "author": "Eugen Guriev",
     "license": "MIT",

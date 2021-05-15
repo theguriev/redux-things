@@ -2,6 +2,7 @@
 node_modules
 dist
 build
+docs
 storybook-static
 
 /tests/e2e/videos/
