@@ -92,6 +92,7 @@ export const useThing = (
                     payload,
                     fetchMoreOptions: generatedFMOptions,
                     canFetchMore: !!generatedFMOptions,
+                    options: launchOptions,
                     key
                 })
                 return payload
