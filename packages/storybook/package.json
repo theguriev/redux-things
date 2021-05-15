@@ -1,12 +1,12 @@
 {
     "name": "@redux-things/storybook",
-    "version": "1.3.3",
+    "version": "1.3.6",
     "description": "A library that allows you to quickly and easily synchronize your store with the server",
     "scripts": {
         "start": "start-storybook -p 6006 --no-manager-cache",
         "storybook": "start-storybook -p 6006",
         "storybook-docs": "start-storybook --docs --no-manager-cache",
-        "build": "build-storybook"
+        "build": "build-storybook --docs -o ../../docs"
     },
     "author": "Eugen Guriev",
     "license": "MIT",
@@ -59,7 +59,7 @@
     },
     "dependencies": {
         "@cryptic-css/core": "^5.0.3",
-        "@redux-things/core": "^1.3.3",
+        "@redux-things/core": "^1.3.6",
         "@you-eye/styled": "^5.0.3",
         "styled-components": "^5.3.0"
     },

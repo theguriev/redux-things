@@ -1,0 +1,40 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+import Logo from '@/assets/logo.png'
+import { Ui } from '@you-eye/styled'
+
+<Meta title="Concepts/Mutations" />
+
+# Mutations
+
+Unlike queries, mutations are typically used to create/update/delete data or perform server side-effects. For this purpose, React Things exports a `useMutation` hook.
+
+Here's an example of a mutation that adds a new todo to the server:
+
+```js
+const App = () => {
+    const { mutate, isLoading, isError, error } = useMutation(newPost => fetch('/posts', { body: JSON.stringify(newPost), method: 'POST' }))
+
+    if (isLoading) {
+        return 'Adding post...'
+    }
+    if (isError) {
+        return <span>Error: {error}</span>
+    }
+    return (
+        <div>
+            <button onClick={() => mutate({ id: 123, title: 'Super mega cool post 😎' })}>Mutate</button>
+        </div>
+    )
+}
+```
+
+A mutation can be in one of the following states:
+
+- `isLoading` - The mutation is currently running
+- `isError` - The mutation encountered an error
+- `isSuccess` - The mutation was successful
+
+Beyond those primary states, more information is available depending on the state of the mutation:
+
+- `error` - If the mutation is in an `isError` state, the error is available via the `error` property.
+- `data` - If the mutation is in a `success` state, the data is available via the `data` property.
