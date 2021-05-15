@@ -30,6 +30,9 @@ export const useThing = (
         initialData,
         getFetchMore,
         dataMapper,
+        onStart,
+        onSuccess,
+        onError,
         skip,
         cache,
         options: externalOptions,
@@ -84,6 +87,10 @@ export const useThing = (
                     isLoading: true,
                     isRefetching: !!launchOptions?.isRefetch
                 }))
+                onStart({
+                    type: `${NAMESPACE}/${key}/pending`,
+                    key
+                })
             },
             onSuccess: payload => {
                 const generatedFMOptions = getFetchMore(payload, selectedData, launchOptions)
@@ -95,10 +102,23 @@ export const useThing = (
                     options: launchOptions,
                     key
                 })
+                onSuccess({
+                    type: `${NAMESPACE}/${key}/fulfilled`,
+                    payload,
+                    fetchMoreOptions: generatedFMOptions,
+                    canFetchMore: !!generatedFMOptions,
+                    options: launchOptions,
+                    key
+                })
                 return payload
             },
             onError: payload => {
                 dispatch({
+                    type: `${NAMESPACE}/${key}/error`,
+                    payload,
+                    key
+                })
+                onError({
                     type: `${NAMESPACE}/${key}/error`,
                     payload,
                     key
