@@ -14,9 +14,9 @@ module.exports = {
     transformIgnorePatterns: ['<rootDir>/node_modules/(?!lodash-es)'],
     bail: true,
     moduleNameMapper: {
-        "^lodash-es$": "lodash"
+        '^lodash-es$': 'lodash'
     },
-    modulePathIgnorePatterns: ["<rootDir>/dist/"],
+    modulePathIgnorePatterns: ['<rootDir>/dist/'],
     testRegex: '\\.?(test|tests|spec|integration)\\.[jt]sx?$',
     collectCoverage: false,
     verbose: true,

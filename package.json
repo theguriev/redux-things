@@ -12,7 +12,8 @@
         "release": "cat logo.txt && lerna version --conventional-commits --yes",
         "bootstrap": "cat logo.txt && lerna bootstrap",
         "build": "cat logo.txt && lerna run build",
-        "storybook": "cat logo.txt && lerna run storybook --parallel"
+        "storybook": "cat logo.txt && lerna run storybook --parallel",
+        "lint": "cat logo.txt && lerna run lint --parallel"
     },
     "dependencies": {
         "lodash-es": "^4.17.21",

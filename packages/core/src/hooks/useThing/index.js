@@ -1,7 +1,7 @@
 import {
     useEffect,
     useState,
-    useCallback,
+    useCallback
 } from 'react'
 import { partialRight } from 'lodash-es'
 import { useSelector, useStore } from 'react-redux'
@@ -175,7 +175,7 @@ export const useThing = (
     const refetchIntervalFn = useCallback(
         () => {
             if (hasFocus || refetchIntervalInBackground) {
-                refetch()
+                reFetch()
             }
         },
         [hasFocus, refetchIntervalInBackground]
