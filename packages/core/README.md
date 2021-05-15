@@ -1,6 +1,9 @@
 <img src="../storybook/src/assets/logo.png" alt="Redux Things" width="100%" />
 A library that allows you to quickly and easily synchronize your store with the server.
 
+* [Introduction](https://theguriev.github.io/redux-things/index.html?path=/docs/getting-started-introduction--page)
+* [Concepts](https://theguriev.github.io/redux-things/index.html?path=/docs/concepts-things--page)
+
 ### Summary
 
 * **It's easy and fast:** Writing your data fetching logic by hand is over. Tell Redux Things where to get your data and how fresh you need it to be and the rest is automatic. Redux Things handles caching, background updates and stale data out of the box with almost zero-configuration. If you know how to work with promises or async/await, then you already know how to use Redux Things. Simply pass a function that resolves your data (or throws an error) and the rest is history.
