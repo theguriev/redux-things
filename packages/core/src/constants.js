@@ -1,1 +1,1 @@
-export const ENTITIES_NAMESPACE = '@redux-entities'
+export const NAMESPACE = '@things'

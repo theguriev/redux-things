@@ -1,6 +1,6 @@
 {
     "name": "redux-things",
-    "private": false,
+    "private": true,
     "workspaces": [
         "packages/*"
     ],
@@ -11,7 +11,8 @@
         "test:watch": "lerna run test --parallel -- --collect-coverage=false --watch",
         "release": "cat logo.txt && lerna version --conventional-commits --yes",
         "bootstrap": "cat logo.txt && lerna bootstrap",
-        "build": "cat logo.txt && lerna run build"
+        "build": "cat logo.txt && lerna run build",
+        "storybook": "cat logo.txt && lerna run storybook --parallel"
     },
     "devDependencies": {
         "lerna": "^4.0.0"

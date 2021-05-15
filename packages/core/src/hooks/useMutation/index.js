@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { promiseCache } from '@/utils'
-import { ENTITIES_NAMESPACE } from '@/constants'
+import { NAMESPACE } from '@/constants'
 import { useMounted } from '../useMounted'
 
 export const useMutation = (
@@ -24,7 +24,7 @@ export const useMutation = (
             promiseFn,
             onStart: () => {
                 dispatch({
-                    type: `${ENTITIES_NAMESPACE}/mutate/${mutationKey}/pending`,
+                    type: `${NAMESPACE}/mutate/${mutationKey}/pending`,
                     key: mutationKey
                 })
                 setState(state => ({
@@ -34,7 +34,7 @@ export const useMutation = (
             },
             onSuccess: payload => {
                 dispatch({
-                    type: `${ENTITIES_NAMESPACE}/mutate/${mutationKey}/fulfilled`,
+                    type: `${NAMESPACE}/mutate/${mutationKey}/fulfilled`,
                     payload,
                     key: mutationKey
                 })
@@ -42,7 +42,7 @@ export const useMutation = (
             },
             onError: payload => {
                 dispatch({
-                    type: `${ENTITIES_NAMESPACE}/mutate/${mutationKey}/error`,
+                    type: `${NAMESPACE}/mutate/${mutationKey}/error`,
                     payload,
                     key: mutationKey
                 })

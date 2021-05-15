@@ -1,8 +1,9 @@
 import {
     useEffect,
     useState,
-    useCallback
+    useCallback,
 } from 'react'
+import { partialRight } from 'lodash-es'
 import { useSelector, useDispatch } from 'react-redux'
 import { useInterval } from 'react-use'
 import {
@@ -11,33 +12,32 @@ import {
     promiseCache,
     preFethPromise
 } from '@/utils'
-import { ENTITIES_NAMESPACE } from '@/constants'
-import {
-    defaultReducer,
-    defaultSelector,
-    entityReducer
-} from './utils'
+import { NAMESPACE } from '@/constants'
+import { entityReducer } from './utils'
 import { useInjectReducer } from '../useInjectReducer'
 import { useMounted } from '../useMounted'
 import { useWindowFocus } from '../useWindowFocus'
+import { useThingsContext } from '../useThingsContext'
 
 export const useThing = (
     key,
     fetchFn,
-    {
-        reducer = defaultReducer,
-        selector = defaultSelector,
-        initialData = () => null,
-        getFetchMore = () => false,
-        dataMapper = v => v,
-        skip = false,
-        cache = 'cache-first',
-        options: externalOptions = null,
-        reFetchOnWindowFocus = false,
-        refetchInterval = null,
-        refetchIntervalInBackground = false
-    } = {}
+    hookOptions = {}
 ) => {
+    const {
+        reducer,
+        selector,
+        initialData,
+        getFetchMore,
+        dataMapper,
+        skip,
+        cache,
+        options: externalOptions,
+        reFetchOnWindowFocus,
+        refetchInterval,
+        refetchIntervalInBackground
+    } = useThingsContext(hookOptions)
+
     const { hasFocus, isFirstTime } = useWindowFocus(!reFetchOnWindowFocus)
     const canFetchMore = useSelector(state => !!state?.[key]?.canFetchMore)
     const fetchMoreOptions = useSelector(state => state?.[key]?.fetchMoreOptions)
@@ -61,14 +61,17 @@ export const useThing = (
     const data = _cache === 'no-cache' ? null : selectedData
     const isInitial = data === null
     const mountedRef = useMounted()
-    const internalReducer = useCallback(flow(entityReducer(key), reducer(key)), [reducer, key])
+    const internalReducer = useCallback(
+        flow(partialRight(entityReducer, key), partialRight(reducer, key)),
+        [reducer, key]
+    )
     const launch = useCallback(
         launchOptions => promiseCache({
             options: typeof options === 'object' ? { ...launchOptions, __ENTITY_KEY__: key } : options,
             promiseFn: fetchFn,
             onStart: () => {
                 dispatch({
-                    type: `${ENTITIES_NAMESPACE}/${key}/pending`,
+                    type: `${NAMESPACE}/${key}/pending`,
                     key
                 })
                 setState(state => ({
@@ -80,7 +83,7 @@ export const useThing = (
             onSuccess: payload => {
                 const generatedFMOptions = getFetchMore(payload, selectedData, launchOptions)
                 dispatch({
-                    type: `${ENTITIES_NAMESPACE}/${key}/fulfilled`,
+                    type: `${NAMESPACE}/${key}/fulfilled`,
                     payload,
                     fetchMoreOptions: generatedFMOptions,
                     canFetchMore: !!generatedFMOptions,
@@ -90,7 +93,7 @@ export const useThing = (
             },
             onError: payload => {
                 dispatch({
-                    type: `${ENTITIES_NAMESPACE}/${key}/error`,
+                    type: `${NAMESPACE}/${key}/error`,
                     payload,
                     key
                 })
@@ -197,4 +200,4 @@ export const useThing = (
     }
 }
 
-useThing.NAMESPACE = ENTITIES_NAMESPACE
+useThing.NAMESPACE = NAMESPACE

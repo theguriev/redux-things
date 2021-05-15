@@ -140,7 +140,7 @@ describe('useThing', () => {
 
     test('fetchMore feature', async () => {
         const MAX_ITEMS = 10
-        const reducer = key => (state, { type, payload: data }) => {
+        const reducer = (state, { type, payload: data }, key) => {
             if (type === `${useThing.NAMESPACE}/${key}/fulfilled`) {
                 return {
                     ...state,

@@ -5,6 +5,8 @@
     "main": "dist/index.js",
     "scripts": {
         "build": "node build.js",
+        "watch": "watch 'npm run build' src",
+        "storybook": "watch 'npm run build' src",
         "lint": "npx eslint --ignore-path .gitignore .",
         "test": "jest",
         "test:watch": "jest --watchAll"
@@ -79,7 +81,8 @@
         "eslint-plugin-jest": "^24.3.6",
         "eslint-plugin-react": "^7.23.2",
         "jest": "^26.6.3",
-        "ts-jest": "^26.5.5"
+        "ts-jest": "^26.5.5",
+        "watch": "^1.0.2"
     },
     "peerDependencies": {
         "prop-types": "^15.7.2",

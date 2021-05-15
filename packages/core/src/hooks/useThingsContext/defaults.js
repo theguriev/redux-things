@@ -12,18 +12,16 @@ export const defaultReducer = (state, { type, payload: data }, key) => {
 
 export const defaultSelector = (state, _options, key) => state?.[key]?.data || null
 
-export const entityReducer = (
-    state,
-    { type, fetchMoreOptions, canFetchMore },
-    key
-) => {
-    const targetType = `${NAMESPACE}/${key}/fulfilled`
-    if (type === targetType) {
-        return {
-            ...state,
-            fetchMoreOptions,
-            canFetchMore
-        }
-    }
-    return state || {}
+export const thingsDefaults = {
+    selector: defaultSelector,
+    reducer: defaultReducer,
+    initialData: () => null,
+    getFetchMore: () => false,
+    dataMapper: v => v,
+    skip: false,
+    cache: 'cache-first',
+    options: null,
+    reFetchOnWindowFocus: false,
+    refetchInterval: null,
+    refetchIntervalInBackground: false
 }
