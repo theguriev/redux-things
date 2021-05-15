@@ -1,0 +1,62 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+import Logo from '@/assets/logo.png'
+import { Ui } from '@you-eye/styled'
+
+<Meta title="Getting Started/Quick Start" />
+
+# Quick Start
+
+This example very briefly illustrates the 2 core concepts of React Things:
+
+* Things
+* Mutations
+
+
+```js
+import { setupAsyncReducers } from '@redux-things/core'
+
+const App = () => (
+    <Todos />
+)
+
+const urlGet = 'https://urlToData.com/todos/get'
+const urlPost = 'https://urlToData.com/todos/post'
+
+const Todos = () => {
+    const { data, refetch } = useThing(
+        'todos',
+        () => fetch(urlGet).then(r => r.json())
+    )
+
+    const { mutate } = useMutation(
+        () => fetch(urlPost, { method: 'POST' }),
+        {
+            onSuccess: () => {
+                refetch()
+            }
+        }
+    )
+
+    const handleOnClick = () => {
+        mutate({
+            id: Date.now(),
+            title: 'Do Laundry',
+        })
+    }
+
+    return (
+        <div>
+            <ul>
+                {data.map(todo => <li key={todo.id}>{todo.title}</li>)}
+            </ul>
+
+            <button onClick={handleOnClick}>
+                Add Todo
+            </button>
+        </div>
+    )
+}
+
+render(<App />, document.getElementById('root'))
+```
+These two concepts make up most of the core functionality of React Things. The next sections of the documentation will go over each of these core concepts in great detail.
