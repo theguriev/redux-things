@@ -6,7 +6,7 @@ import { setupAsyncReducers, ThingsContext } from '@redux-things/core'
 export const parameters = {
     options: {
         storySort: {
-            order: ['Getting Started', ['Introduction', 'Installation']],
+            order: ['Getting Started', ['Introduction', 'Installation'], 'Concepts', ['Things', 'Mutations']],
         }
     }
 }
