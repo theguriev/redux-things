@@ -55,7 +55,7 @@ export const useThing = (
         cache,
         options: fetchMoreOptions || externalOptions
     })
-    const { dispatch, getStore } = useStore()
+    const { dispatch, getState } = useStore()
     const initialDataFn = toFunction(initialData)
     const selectedData = useSelector(state => selector(state, options, key))
     const data = _cache === 'no-cache' ? null : selectedData
@@ -71,7 +71,7 @@ export const useThing = (
             promiseFn: fetchOptions => fetchFn({
                 options: fetchOptions,
                 dispatch,
-                getStore,
+                getState,
                 extra
             }),
             onStart: () => {

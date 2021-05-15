@@ -1,7 +1,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import { setupAsyncReducers } from '@redux-things/core'
+import { setupAsyncReducers, ThingsContext } from '@redux-things/core'
 
 export const parameters = {
     actions: { argTypesRegex: "^on[A-Z].*" },
@@ -21,6 +21,13 @@ export const StoreDecorator = (StoryFn) => (
     </Provider>
 )
 
+export const ThingsDecorator = StoryFn => (
+    <ThingsContext.Provider value={{ apiClient: () => console.log('apiclient') }}>
+        <StoryFn />
+    </ThingsContext.Provider>
+)
+
 export const decorators = [
-    StoreDecorator
+    StoreDecorator,
+    ThingsDecorator
 ]
