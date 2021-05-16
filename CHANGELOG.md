@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/theguriev/redux-entities/compare/v1.3.8...v1.4.0) (2021-05-16)
+
+
+### Features
+
+* **core:** fix dependencies in useThing ([57a499f](https://github.com/theguriev/redux-entities/commit/57a499fcdbfc8be7e3cbe52601aee00a9d13e813))
+
+
+
+
+
 ## [1.3.2](https://github.com/theguriev/redux-entities/compare/v1.3.1...v1.3.2) (2021-05-15)
 
 **Note:** Version bump only for package redux-things
