@@ -1,6 +1,7 @@
 {
     "name": "redux-things",
     "private": true,
+    "keywords": ["redux", "queries", "things", "data", "data management", "caching", "cache", "fetch", "promise", "store", "state"],
     "workspaces": [
         "packages/*"
     ],

@@ -2,6 +2,7 @@
     "name": "@redux-things/core",
     "version": "1.4.2",
     "description": "A library that allows you to quickly and easily synchronize your store with the server.",
+    "keywords": ["redux", "queries", "things", "data", "data management", "caching", "cache", "fetch", "promise", "store", "state"],
     "main": "dist/index.js",
     "scripts": {
         "build": "node build.js",
