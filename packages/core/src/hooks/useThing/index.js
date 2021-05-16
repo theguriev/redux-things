@@ -37,8 +37,8 @@ export const useThing = (
         cache,
         options: externalOptions,
         reFetchOnWindowFocus,
-        refetchInterval,
-        refetchIntervalInBackground,
+        reFetchInterval,
+        reFetchIntervalInBackground,
         ...extra
     } = useThingsContext(hookOptions)
     const { hasFocus, isFirstTime } = useWindowFocus(!reFetchOnWindowFocus)
@@ -192,16 +192,16 @@ export const useThing = (
 
     const raw = data || initialDataFn(options)
     const mappedData = dataMapper(raw, { isLoading, isRefetching, isInitial })
-    const refetchIntervalFn = useCallback(
+    const reFetchIntervalFn = useCallback(
         () => {
-            if (hasFocus || refetchIntervalInBackground) {
+            if (hasFocus || reFetchIntervalInBackground) {
                 reFetch()
             }
         },
-        [hasFocus, refetchIntervalInBackground]
+        [hasFocus, reFetchIntervalInBackground]
     )
 
-    useInterval(refetchIntervalFn, refetchInterval)
+    useInterval(reFetchIntervalFn, reFetchInterval)
 
     useInjectReducer(key, internalReducer)
 
