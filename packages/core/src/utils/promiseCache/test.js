@@ -102,7 +102,7 @@ describe('Promise cache', () => {
     })
 
     test('preFetchThing', async () => {
-        const res = await preFetchThing('EWhatever', () => Promise.resolve('hello'), { abc: 333 })
+        await preFetchThing('EWhatever', () => Promise.resolve('hello'), { abc: 333 })
         expect(promiseCache.preFetchCache.size).toBe(1)
     })
 })
