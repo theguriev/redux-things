@@ -1,4 +1,4 @@
-<img src="../storybook/src/assets/logo.png" alt="Redux Things" width="100%" />
+<img src="https://raw.githubusercontent.com/theguriev/redux-things/master/packages/storybook/src/assets/logo.png" alt="Redux Things" width="100%" />
 A library that allows you to quickly and easily synchronize your store with the server.
 
 * [Introduction](https://theguriev.github.io/redux-things/index.html?path=/docs/getting-started-introduction--page)
