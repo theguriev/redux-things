@@ -154,14 +154,19 @@ export const useThing = (
                     return catchedError
                 }
             }),
-        [fetchFn, getFetchMore, selectedData, setState]
+        [fetchFn, getFetchMore, selectedData, setState, dispatch, getState, extra]
     )
 
     const reFetch = useCallback(() => launch({ ...options, isRefetch: true }), [options])
     const preFetch = useCallback((extendOptions = {}) => preFethPromise({
         options: typeof options === 'object' ? { ...options, __ENTITY_KEY__: key, ...extendOptions } : options,
-        promiseFn: fetchFn
-    }), [options])
+        promiseFn: fetchOptions => fetchFn({
+            options: fetchOptions,
+            dispatch,
+            getState,
+            extra
+        })
+    }), [options, fetchFn, dispatch, getState, extra])
 
     const fetchMore = useCallback(
         newOptions => {
