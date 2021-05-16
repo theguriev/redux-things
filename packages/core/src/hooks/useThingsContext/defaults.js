@@ -25,6 +25,6 @@ export const thingsDefaults = {
     cache: 'cache-first',
     options: null,
     reFetchOnWindowFocus: false,
-    refetchInterval: null,
-    refetchIntervalInBackground: false
+    reFetchInterval: null,
+    reFetchIntervalInBackground: false
 }
