@@ -1,6 +1,6 @@
 /* eslint-disable prefer-promise-reject-errors */
 import {
-    promiseCache, preFethPromise, cache, preFetchCache
+    promiseCache, preFethPromise, cache, preFetchCache, preFetchThing
 } from '.'
 
 const options = { abc: 123 }
@@ -99,5 +99,10 @@ describe('Promise cache', () => {
         expect(result).toEqual(['prefetch', 'onStart', 'onSuccess'])
         expect(fetchingCount).toEqual(1)
         expect(promiseResult).toBe(prefetchedData)
+    })
+
+    test('preFetchThing', async () => {
+        const res = await preFetchThing('EWhatever', () => Promise.resolve('hello'), { abc: 333 })
+        expect(promiseCache.preFetchCache.size).toBe(1)
     })
 })

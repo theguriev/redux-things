@@ -56,5 +56,15 @@ export const preFethPromise = ({
     return promise
 }
 
+export const preFetchThing = (key, promiseFn, options = {}) => preFethPromise(
+    {
+        options: {
+            ...options,
+            __ENTITY_KEY__: key
+        },
+        promiseFn
+    }
+)
+
 promiseCache.cache = cache
 promiseCache.preFetchCache = preFetchCache
