@@ -1,0 +1,47 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+import Logo from '@/assets/logo.png'
+import { Ui } from '@you-eye/styled'
+
+<Meta title="API Reference/useMutation" />
+
+# useMutation
+
+
+```js
+const {
+    isLoading,
+    isError,
+    error,
+    data,
+    mutate
+} = useMutation(
+    fn,
+    {
+        mutationKey,
+        onStart,
+        onSuccess,
+        onError
+    }
+)
+```
+
+## Options
+* `fetchFn: Function` - any promise which will update, delete some data on the server.
+* `hookOptions: Object` - hook options.
+
+### Hook options
+
+* `mutationKey: string` - thing mutation key. Can be any string and usually we use something like MSomething, MWhatever, etc.
+* `onStart: Function` - will be fired when mutate will be launched.
+* `onSuccess: Function` - when promise will resolved.
+* `onError: Function` - when promise will rejected.
+
+## Returns
+
+* `isError: boolean` - has some errors or not.
+* `isLoading: boolean` - true if the thing is currently fetching.
+* `error: any` - the error object or string.
+* `data`
+    * Defaults to `null`.
+    * The last successfully resolved data for the thing.
+* `mutate: Function` - a function to manually launch mutation.
