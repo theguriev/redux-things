@@ -1,0 +1,62 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+import Logo from '@/assets/logo.png'
+import { Ui } from '@you-eye/styled'
+
+<Meta title="API Reference/useThingContext" />
+
+# useThingContext
+
+
+```js
+const {
+    reducer,
+    selector,
+    initialData,
+    getFetchMore,
+    dataMapper,
+    onStart,
+    onSuccess,
+    onError,
+    skip,
+    cache,
+    options: externalOptions,
+    reFetchOnWindowFocus,
+    reFetchInterval,
+    reFetchIntervalInBackground,
+    ...extra
+} = useThingsContext(somethingToMergeWithReturns)
+```
+
+## Options
+* `somethingToMergeWithReturns: Object` - any Record<string, unknow> which will be merged with options what was passed through ThingsContext. We use it inside the useThing hook so I have no idea why you might need it but anyway here is some info about it. U can set this global options like this:
+```js
+import { ThingsContext } from '@redux-things/core'
+
+<ThingsContext.Provider value={{
+    apiClient: () => console.log('U can reach this in fetchFn'),
+    skip: true // all useThing will be skipped by default
+}}>
+    <App />
+</ThingsContext.Provider>
+```
+
+## Returns
+
+* `reducer: Function` - classical redux reducer.
+* `selector: Function` - selector to select data from the store.
+* `initialData: Function | any` - if set, this value will be used as the initial data for the thing.
+* `getFetchMore = () => boolean | object` function to generate fetch options to fetchMore function.
+    * When new data is received for this thing, this function receives last options, last fetch result of the infinite list of data and the full array of all chunks.
+    * Return `false` to indicate there is no next page available.
+* `dataMapper: Function` - data mapper function. It will prepare your data before showing it somewhere. Use *mappedData* as a result of dataMapper.
+* `skip: boolean`
+    * Set this to **true** to disable this thing from automatically running.
+    * Can be used for dependent entities.
+* `cache: string`
+    * 'no-cache' - try to fetch on the first usage of the hook.
+    * 'cache-first' - get data from the cache and if there is not cache fetch it.
+* `options: Record<string, unknown>` - will be passed into fetch, fetchMore, refetch  function and selector as a second argument. Here should be only data which can be serialized.
+* `refetchOnWindowFocus: boolean` - If set to true, the thing will refetch on window focus if the data is stale.
+* `refetchInterval: false | number` - If set to a number, all things will continuously refetch at this frequency in milliseconds.
+* `reFetchIntervalInBackground: boolean` - If set to true, things that are set to continuously refetch with a refetchInterval will continue to refetch while their tab/window is in the background.
+* `...extra: any` - anything you wanna pass to fetchFn.  Usually, it's some API client or something like that.
