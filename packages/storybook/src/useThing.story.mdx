@@ -67,6 +67,9 @@ const {
 * `refetchOnWindowFocus: boolean` - If set to true, the thing will refetch on window focus if the data is stale.
 * `refetchInterval: false | number` - If set to a number, all things will continuously refetch at this frequency in milliseconds.
 * `reFetchIntervalInBackground: boolean` - If set to true, things that are set to continuously refetch with a refetchInterval will continue to refetch while their tab/window is in the background.
+* `onStart: Function` - will be fired when fetching will be launched.
+* `onSuccess: Function` - when promise will resolved.
+* `onError: Function` - when promise will rejected.
 * `...extra: any` - anything you wanna pass to fetchFn.  Usually, it's some API client or something like that.
 
 ## Returns

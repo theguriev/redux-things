@@ -1,0 +1,34 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+import Logo from '@/assets/logo.png'
+import { Ui } from '@you-eye/styled'
+
+<Meta title="API Reference/useMutationContext" />
+
+# useMutationContext
+
+
+```js
+const {
+    mutationKey = 'global',
+    onStart = () => {},
+    onSuccess = () => {},
+    onError = () => {}
+} = useMutationContext(somethingToMergeWithReturns)
+```
+
+## Options
+* `somethingToMergeWithReturns: Object` - any Record<string, unknow> which will be merged with options what was passed through MutationContext. We use it inside the useMutation hook so I have no idea why you might need it but anyway here is some info about it. U can set this global options like this:
+```js
+import { MutationContext } from '@redux-things/core'
+
+<MutationContext.Provider value={{ mutationKey: 'mutation' }}>
+    <App />
+</MutationContext.Provider>
+```
+
+## Returns
+
+* `mutationKey: string` - thing mutation key. Can be any string and usually we use something like MSomething, MWhatever, etc.
+* `onStart: Function` - will be fired when mutate will be launched.
+* `onSuccess: Function` - when promise will resolved.
+* `onError: Function` - when promise will rejected.
