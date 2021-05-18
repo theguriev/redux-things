@@ -1,0 +1,24 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="API Reference/useWindowFocus"/>
+
+# useWindowFocus
+
+Returns true if the window has focus, false if not.
+
+```js
+const hasFocus = useWindowFocus()
+console.log('hasFocus', hasFocus)
+return (
+    <div>
+        <pre>
+            Switch to another tab and switch back ( keep your console open ).
+            <br />
+            Has focus: <b>{JSON.stringify(hasFocus, null, 4)}</b>
+        </pre>
+    </div>
+)
+```
+
+### Options
+* `skip: boolean` - Set this to **true** to disable event listening.
