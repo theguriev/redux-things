@@ -1,0 +1,34 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="API Reference/useInjectReducer"/>
+
+# useInjectReducer
+Hook to add reducers to the store on the fly. By default, Redux does not provide this feature, so we had to add it. The important thing is that you should setup your store in a special way to make it work. Example:
+```js
+import { setupAsyncReducers } from '@redux-things/core'
+const store = setupAsyncReducers(
+    configureStore({ reducer: combineReducers(staticReducers), middleware }),
+    staticReducers
+)
+```
+
+
+## Common usage example:
+```js
+const key = 'TWhatever'
+const reducer = (state, { type, payload: data }, key) => {
+    if (type === `${key}/fulfilled`) {
+        return {
+            ...state,
+            data
+        }
+    }
+    return state || {}
+}
+
+useInjectReducer(key, reducer)
+```
+
+### Options
+* `key: string` - thing key. Can be any string but usually we use something like TSomething, TWhatever, etc.
+* `reducer: (state, action, key) => state` - classical redux reducer.
