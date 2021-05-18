@@ -1,6 +1,6 @@
 {
     "name": "@redux-things/core",
-    "version": "1.4.3",
+    "version": "1.4.4",
     "description": "A library that allows you to quickly and easily synchronize your store with the server.",
     "keywords": [
         "redux",
