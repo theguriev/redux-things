@@ -1,4 +1,3 @@
-import objectHash from 'object-hash'
 import { flow } from '../flow'
 
 export const cache = new Map()
@@ -22,18 +21,17 @@ const removePromiseFromCache = hash => result => {
 }
 
 export const promiseCache = ({
-    options,
+    hash,
     promiseFn,
     onStart = () => {},
     onSuccess = () => {},
     onError = () => {}
 }) => {
-    const hash = objectHash(options, { unorderedObjects: true })
     if (cache.has(hash)) {
         return cache.get(hash)
     }
     onStart()
-    const promise = preFetchOrFetch(hash, () => promiseFn(options))
+    const promise = preFetchOrFetch(hash, promiseFn)
     cache.set(hash, promise)
     return promise
         .then(flow(onSuccess, removePromiseFromCache(hash)))
@@ -44,14 +42,13 @@ export const promiseCache = ({
  * Put promise into preFetch cache.
  */
 export const preFethPromise = ({
-    options,
+    hash,
     promiseFn
 }) => {
-    const hash = objectHash(options, { unorderedObjects: true })
     if (preFetchCache.has(hash)) {
         return preFetchCache.get(hash)
     }
-    const promise = promiseFn(options)
+    const promise = promiseFn()
     preFetchCache.set(hash, promise)
     return promise
 }

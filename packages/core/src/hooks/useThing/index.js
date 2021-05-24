@@ -3,7 +3,7 @@ import {
     useState,
     useCallback
 } from 'react'
-import { partialRight } from 'lodash-es'
+import { partialRight, partial } from 'lodash-es'
 import { useSelector, useStore } from 'react-redux'
 import { useInterval } from 'react-use'
 import {
@@ -12,12 +12,16 @@ import {
     promiseCache,
     preFethPromise
 } from '@/utils'
-import { NAMESPACE } from '@/constants'
-import { entityReducer } from './utils'
+import {
+    thingReducer,
+    Types,
+    generateType
+} from './utils'
 import { useInjectReducer } from '../useInjectReducer'
 import { useMounted } from '../useMounted'
 import { useWindowFocus } from '../useWindowFocus'
 import { useThingsContext } from '../useThingsContext'
+import launchFlow from './launchFlow'
 
 export const useThing = (
     key,
@@ -33,14 +37,19 @@ export const useThing = (
         onStart,
         onSuccess,
         onError,
+        objectToHashFn,
         skip,
         cache,
         options: externalOptions,
         reFetchOnWindowFocus,
         reFetchInterval,
         reFetchIntervalInBackground,
+        namespace,
+        delimiter,
         ...extra
     } = useThingsContext(hookOptions)
+
+    const toType = partial(generateType, delimiter, namespace, key)
     const { hasFocus, isFirstTime } = useWindowFocus(!reFetchOnWindowFocus)
     const canFetchMore = useSelector(state => !!state?.[key]?.canFetchMore)
     const fetchMoreOptions = useSelector(state => state?.[key]?.fetchMoreOptions)
@@ -65,108 +74,61 @@ export const useThing = (
     const isInitial = data === null
     const mountedRef = useMounted()
     const internalReducer = useCallback(
-        flow(partialRight(entityReducer, key), partialRight(reducer, key)),
-        [reducer, key]
+        flow(partialRight(thingReducer, { toType }), partialRight(reducer, { toType })),
+        [reducer, toType]
     )
     const launch = useCallback(
-        launchOptions => promiseCache({
-            options: typeof options === 'object' ? { ...launchOptions, __ENTITY_KEY__: key } : options,
-            promiseFn: fetchOptions => fetchFn({
-                options: fetchOptions,
+        launchOptions => promiseCache(
+            launchFlow({
+                fetchFn,
+                getFetchMore,
+                selectedData,
+                setState,
                 dispatch,
                 getState,
-                extra
-            }),
-            onStart: () => {
-                dispatch({
-                    type: `${NAMESPACE}/${key}/pending`,
-                    key
-                })
-                setState(state => ({
-                    ...state,
-                    isLoading: true,
-                    isRefetching: !!launchOptions?.isRefetch
-                }))
-                onStart({
-                    type: `${NAMESPACE}/${key}/pending`,
-                    key
-                })
-            },
-            onSuccess: payload => {
-                const generatedFMOptions = getFetchMore(payload, selectedData, launchOptions)
-                dispatch({
-                    type: `${NAMESPACE}/${key}/fulfilled`,
-                    payload,
-                    fetchMoreOptions: generatedFMOptions,
-                    canFetchMore: !!generatedFMOptions,
-                    options: launchOptions,
-                    key
-                })
-                onSuccess({
-                    type: `${NAMESPACE}/${key}/fulfilled`,
-                    payload,
-                    fetchMoreOptions: generatedFMOptions,
-                    canFetchMore: !!generatedFMOptions,
-                    options: launchOptions,
-                    key
-                })
-                return payload
-            },
-            onError: payload => {
-                dispatch({
-                    type: `${NAMESPACE}/${key}/error`,
-                    payload,
-                    key
-                })
-                onError({
-                    type: `${NAMESPACE}/${key}/error`,
-                    payload,
-                    key
-                })
-                return payload
-            }
-        })
-            .then(
-                payload => {
-                    if (mountedRef.current) {
-                        setState(state => ({
-                            ...state,
-                            error: null,
-                            isLoading: false,
-                            isRefetching: false,
-                            cache: 'cache-first'
-                        }))
-                    }
-                    return payload
-                }
-            )
-            .catch(catchedError => {
-                if (!catchedError) {
-                    if (mountedRef.current) {
-                        setState(state => ({
-                            ...state,
-                            error: catchedError,
-                            isLoading: false,
-                            isRefetching: false,
-                            cache: 'cache-first'
-                        }))
-                    }
-                    return catchedError
-                }
-            }),
-        [fetchFn, getFetchMore, selectedData, setState, dispatch, getState, extra]
+                extra,
+                objectToHashFn,
+                launchOptions,
+                toType,
+                key,
+                mountedRef,
+                onStart,
+                onSuccess,
+                onError
+            })
+        ),
+        [
+            fetchFn,
+            getFetchMore,
+            selectedData,
+            setState,
+            dispatch,
+            getState,
+            extra,
+            objectToHashFn,
+            options,
+            toType,
+            key,
+            onStart,
+            onSuccess,
+            onError
+        ]
     )
 
     const reFetch = useCallback(() => launch({ ...options, isRefetch: true }), [options])
-    const preFetch = useCallback((extendOptions = {}) => preFethPromise({
-        options: typeof options === 'object' ? { ...options, __ENTITY_KEY__: key, ...extendOptions } : options,
-        promiseFn: fetchOptions => fetchFn({
-            options: fetchOptions,
-            dispatch,
-            getState,
-            extra
+    const preFetch = useCallback((extendOptions = {}) => {
+        const cacheOptions = typeof options === 'object' ? { ...options, __THING_KEY__: key, ...extendOptions } : options
+        const hash = objectToHashFn(cacheOptions)
+        return preFethPromise({
+            hash,
+            promiseFn: () => fetchFn({
+                options: cacheOptions,
+                dispatch,
+                getState,
+                extra
+            })
         })
-    }), [options, fetchFn, dispatch, getState, extra])
+    }, [options, fetchFn, dispatch, getState, extra, objectToHashFn])
 
     const fetchMore = useCallback(
         newOptions => {
@@ -193,18 +155,15 @@ export const useThing = (
         if (!error && !skip && (!isLoading || _cache === 'no-cache') && !data) {
             launch(options)
         }
-    }, [skip, error, isLoading, data])
+    }, [skip, error, isLoading, options])
 
     const raw = data || initialDataFn(options)
     const mappedData = dataMapper(raw, { isLoading, isRefetching, isInitial })
-    const reFetchIntervalFn = useCallback(
-        () => {
-            if (hasFocus || reFetchIntervalInBackground) {
-                reFetch()
-            }
-        },
-        [hasFocus, reFetchIntervalInBackground]
-    )
+    const reFetchIntervalFn = () => {
+        if (hasFocus || reFetchIntervalInBackground) {
+            reFetch()
+        }
+    }
 
     useInterval(reFetchIntervalFn, reFetchInterval)
 
@@ -231,4 +190,4 @@ export const useThing = (
     }
 }
 
-useThing.NAMESPACE = NAMESPACE
+useThing.Types = Types

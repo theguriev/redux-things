@@ -1,12 +1,15 @@
-import { NAMESPACE } from '@/constants'
+export const Types = {
+    Pending: 'pending',
+    Fulfilled: 'fulfilled',
+    Error: 'error'
+}
 
-export const entityReducer = (
+export const thingReducer = (
     state,
     { type, fetchMoreOptions, canFetchMore },
-    key
+    { toType }
 ) => {
-    const targetType = `${NAMESPACE}/${key}/fulfilled`
-    if (type === targetType) {
+    if (type === toType(Types.Fulfilled)) {
         return {
             ...state,
             fetchMoreOptions,
@@ -15,3 +18,13 @@ export const entityReducer = (
     }
     return state || {}
 }
+
+/**
+ * It will create a type string for action from array.
+ * Example:
+ * generateType('/', ['@redux-things', 'success']) === '@redux-things/success'
+ *
+ * @param {string} delimiter type delimiter
+ * @param  {...any} rest type string parts.
+ */
+export const generateType = (delimiter, ...rest) => rest.join(delimiter)
