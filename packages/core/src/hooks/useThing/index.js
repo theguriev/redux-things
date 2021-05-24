@@ -3,7 +3,7 @@ import {
     useState,
     useCallback
 } from 'react'
-import { partialRight, partial } from 'lodash-es'
+import { partialRight, partial, isEqual } from 'lodash-es'
 import { useSelector, useStore } from 'react-redux'
 import { useInterval } from 'react-use'
 import {
@@ -24,6 +24,7 @@ import { useInjectReducer } from '../useInjectReducer'
 import { useMounted } from '../useMounted'
 import { useWindowFocus } from '../useWindowFocus'
 import { useThingsContext } from '../useThingsContext'
+import { useCompareEffect } from '../useCompareEffect'
 
 export const useThing = (
     key,
@@ -42,7 +43,7 @@ export const useThing = (
         objectToHashFn,
         skip,
         cache,
-        options: externalOptions,
+        options: externalOptions = {},
         reFetchOnWindowFocus,
         reFetchInterval,
         reFetchIntervalInBackground,
@@ -144,14 +145,14 @@ export const useThing = (
 
     // If hook props change we need to update internal options state as
     // internal state might be different with prev props due to change by fetch more action
-    useEffect(() => {
+    useCompareEffect(() => {
         if (externalOptions) {
             setState(state => ({
                 ...state,
                 options: externalOptions
             }))
         }
-    }, [JSON.stringify(externalOptions)])
+    }, [externalOptions], isEqual)
 
     useEffect(() => {
         if (!error && !skip && (!isLoading || _cache === 'no-cache') && !data) {
