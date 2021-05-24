@@ -16,6 +16,7 @@ import {
     preFethPromise,
     launchFlow,
     preFetchFlow,
+    selectFlow,
     LauncFlowTypes
 } from '@/common'
 import {
@@ -73,7 +74,17 @@ export const useThing = (
     })
     const { dispatch, getState } = useStore()
     const initialDataFn = toFunction(initialData)
-    const selectedData = useSelector(state => selector(state, options, { toType, key }))
+    const selectedData = useSelector(
+        state => selector(
+            state,
+            selectFlow({
+                launchOptions: options,
+                objectToHashFn,
+                key,
+                toType
+            })
+        )
+    )
     const data = _cache === 'no-cache' ? null : selectedData
     const isInitial = data === null
     const mountedRef = useMounted()

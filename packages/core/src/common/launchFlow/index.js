@@ -29,4 +29,13 @@ export const preFetchFlow = flow(
     )
 )
 
+export const selectFlow = flow(
+    ...(
+        [
+            addOptions,
+            addHash
+        ].map(propsWrapper)
+    )
+)
+
 export * from './enums'

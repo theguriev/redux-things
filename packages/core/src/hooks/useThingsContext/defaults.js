@@ -10,7 +10,7 @@ export const defaultReducer = (state, { type, payload: data }, { toType }) => {
     return state || {}
 }
 
-export const defaultSelector = (state, _options, { key }) => state?.[key]?.data || null
+export const defaultSelector = (state, { key }) => state?.[key]?.data || null
 
 export const thingsDefaults = {
     selector: defaultSelector,

@@ -164,7 +164,7 @@ The returned properties for `useBasicEntity` are identical to the `useRequest` [
             })
             return (
                 <div>
-                    <button type="button" onClick={() => fetchMore()} disabled={!canFetchMore}>Fetch more</button>
+                    <button type="button" onClick={() => fetchMore()} disabled={!canFetchMore || isLoading}>Fetch more</button>
                     <pre>{JSON.stringify(data, null, 4)}</pre>
                 </div>
             )
