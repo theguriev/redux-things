@@ -190,7 +190,7 @@ describe('useThing', () => {
         expect(result.current.data.length).toBe(10)
     })
 
-    test('reFetch feature', async () => {
+    test('refetch feature', async () => {
         const { result, waitForValueToChange } = renderHook(
             () => useThing(
                 'TRefetchEntity',
@@ -203,7 +203,7 @@ describe('useThing', () => {
         )
         await waitForValueToChange(() => result.current.isLoading)
         act(() => {
-            result.current.reFetch()
+            result.current.refetch()
         })
         await waitForValueToChange(() => result.current.isLoading)
         expect(result.all).toMatchSnapshot()
