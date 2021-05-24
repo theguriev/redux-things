@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/theguriev/redux-things/compare/v1.5.3...v1.6.0) (2021-05-24)
+
+
+### Features
+
+* **core:** add toType to returns ([3eeeb2d](https://github.com/theguriev/redux-things/commit/3eeeb2d3f354c3e7fdb123b229751849f1d9bfd5))
+
+
+
+
+
 ## [1.5.2](https://github.com/theguriev/redux-things/compare/v1.5.1...v1.5.2) (2021-05-24)
 
 **Note:** Version bump only for package redux-things
