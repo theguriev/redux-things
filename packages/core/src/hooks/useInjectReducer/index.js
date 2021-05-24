@@ -2,7 +2,7 @@
 import { useEffect } from 'react'
 import { useStore } from 'react-redux'
 import { omit } from 'lodash-es'
-import { combineReducers } from '@reduxjs/toolkit'
+import { combineReducers } from 'redux'
 
 export const setupAsyncReducers = (store, staticReducer) => {
     store.asyncReducers = {}
