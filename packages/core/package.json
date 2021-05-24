@@ -1,6 +1,6 @@
 {
     "name": "@redux-things/core",
-    "version": "1.5.0",
+    "version": "1.5.1",
     "description": "A library that allows you to quickly and easily synchronize your store with the server.",
     "keywords": [
         "redux",
@@ -70,7 +70,7 @@
         "@babel/plugin-transform-modules-commonjs": "^7.13.8",
         "@babel/preset-env": "^7.11.5",
         "@babel/preset-react": "^7.10.4",
-        "@redux-things/mocks": "^1.5.0",
+        "@redux-things/mocks": "^1.5.1",
         "@storybook/addon-actions": "^6.1.21",
         "@storybook/addon-essentials": "^6.1.21",
         "@storybook/addon-links": "^6.1.21",
