@@ -1,4 +1,4 @@
-import { Types } from '../utils'
+import { LauncFlowTypes } from './enums'
 
 export default ({
     dispatch,
@@ -11,7 +11,7 @@ export default ({
 }) => ({
     onStart: () => {
         const action = {
-            type: toType(Types.Pending),
+            type: toType(LauncFlowTypes.Pending),
             hash,
             key
         }

@@ -35,39 +35,3 @@ Object {
   "type": "error",
 }
 `;
-
-exports[`addOnError add onError option 1`] = `
-Array [
-  Object {
-    "hash": "hash",
-    "key": "TKey",
-    "payload": Object {
-      "testing": true,
-    },
-    "type": "error",
-  },
-]
-`;
-
-exports[`addOnError add onError option 2`] = `
-Object {
-  "cache": "cache-first",
-  "error": Object {
-    "testing": true,
-  },
-  "initial": true,
-  "isLoading": false,
-  "isRefetching": false,
-}
-`;
-
-exports[`addOnError add onError option 3`] = `
-Object {
-  "hash": "hash",
-  "key": "TKey",
-  "payload": Object {
-    "testing": true,
-  },
-  "type": "error",
-}
-`;

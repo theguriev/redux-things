@@ -9,19 +9,21 @@ import { useInterval } from 'react-use'
 import {
     toFunction,
     flow,
-    promiseCache,
-    preFethPromise
+    restImplode
 } from '@/utils'
 import {
-    thingReducer,
-    Types,
-    generateType
+    promiseCache,
+    preFethPromise,
+    launchFlow,
+    LauncFlowTypes
+} from '@/common'
+import {
+    thingReducer
 } from './utils'
 import { useInjectReducer } from '../useInjectReducer'
 import { useMounted } from '../useMounted'
 import { useWindowFocus } from '../useWindowFocus'
 import { useThingsContext } from '../useThingsContext'
-import launchFlow from './launchFlow'
 
 export const useThing = (
     key,
@@ -49,7 +51,7 @@ export const useThing = (
         ...extra
     } = useThingsContext(hookOptions)
 
-    const toType = partial(generateType, delimiter, namespace, key)
+    const toType = partial(restImplode, delimiter, namespace, key)
     const { hasFocus, isFirstTime } = useWindowFocus(!reFetchOnWindowFocus)
     const canFetchMore = useSelector(state => !!state?.[key]?.canFetchMore)
     const fetchMoreOptions = useSelector(state => state?.[key]?.fetchMoreOptions)
@@ -115,7 +117,7 @@ export const useThing = (
         ]
     )
 
-    const reFetch = useCallback(() => launch({ ...options, isRefetch: true }), [options])
+    const reFetch = useCallback(() => launch({ ...options, isRefetch: true }), [options, launch])
     const preFetch = useCallback((extendOptions = {}) => {
         const cacheOptions = typeof options === 'object' ? { ...options, __THING_KEY__: key, ...extendOptions } : options
         const hash = objectToHashFn(cacheOptions)
@@ -190,4 +192,4 @@ export const useThing = (
     }
 }
 
-useThing.Types = Types
+useThing.Types = LauncFlowTypes

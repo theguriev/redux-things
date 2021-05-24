@@ -7,8 +7,8 @@ Array [
     "fetchMoreOptions": Object {
       "fetchMoreOptions": "willBeHere",
     },
-    "hash": undefined,
-    "key": undefined,
+    "hash": "hash",
+    "key": "TKey",
     "options": Object {
       "abc": 123,
     },
@@ -27,6 +27,9 @@ Object {
   "initial": true,
   "isLoading": false,
   "isRefetching": false,
+  "onSuccessData": Object {
+    "testing": true,
+  },
 }
 `;
 
@@ -36,8 +39,8 @@ Object {
   "fetchMoreOptions": Object {
     "fetchMoreOptions": "willBeHere",
   },
-  "hash": undefined,
-  "key": undefined,
+  "hash": "hash",
+  "key": "TKey",
   "options": Object {
     "abc": 123,
   },

@@ -1,7 +1,11 @@
 /* eslint-disable prefer-promise-reject-errors */
 import {
-    promiseCache, preFethPromise, cache, preFetchCache, preFetchThing
-} from '.'
+    promiseCache,
+    preFethPromise,
+    cache,
+    preFetchCache,
+    preFetchThing
+} from './index'
 
 const options = { abc: 123 }
 const resolvedData = 'resolved data'

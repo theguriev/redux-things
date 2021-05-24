@@ -6,7 +6,7 @@ import { default as addOnStart } from './addOnStart'
 import { default as addOnSuccess } from './addOnSuccess'
 import { default as addOnError } from './addOnError'
 
-const launchFlow = flow(
+export const launchFlow = flow(
     ...(
         [
             addOptions,
@@ -19,4 +19,4 @@ const launchFlow = flow(
     )
 )
 
-export default launchFlow
+export * from './enums'

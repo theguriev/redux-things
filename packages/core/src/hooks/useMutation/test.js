@@ -6,7 +6,7 @@ describe('useMutation', () => {
     test('basic mutation', async () => {
         const { result, waitForValueToChange } = renderHook(
             () => useMutation(
-                options => Promise.resolve(`Here we will send some data to the server 😇 ${options.test}`)
+                ({ options }) => Promise.resolve(`Here we will send some data to the server 😇 ${options.test}`)
             ),
             { wrapper }
         )

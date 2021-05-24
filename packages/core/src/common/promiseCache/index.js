@@ -1,4 +1,4 @@
-import { flow } from '../flow'
+import { flow } from '@/utils'
 
 export const cache = new Map()
 export const preFetchCache = new Map()

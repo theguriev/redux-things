@@ -18,13 +18,3 @@ export const thingReducer = (
     }
     return state || {}
 }
-
-/**
- * It will create a type string for action from array.
- * Example:
- * generateType('/', ['@redux-things', 'success']) === '@redux-things/success'
- *
- * @param {string} delimiter type delimiter
- * @param  {...any} rest type string parts.
- */
-export const generateType = (delimiter, ...rest) => rest.join(delimiter)

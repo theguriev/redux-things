@@ -1,8 +1,8 @@
-import { Types } from '../utils'
+import { LauncFlowTypes } from './enums'
 
 export default ({
-    getFetchMore,
-    selectedData,
+    getFetchMore = false,
+    selectedData = null,
     options,
     toType,
     mountedRef,
@@ -13,20 +13,22 @@ export default ({
     hash
 }) => ({
     onSuccess: payload => {
-        const generatedFMOptions = getFetchMore(
-            payload,
-            selectedData,
-            options,
-            hash
-        )
         const action = {
-            type: toType(Types.Fulfilled),
+            type: toType(LauncFlowTypes.Fulfilled),
             payload,
-            fetchMoreOptions: generatedFMOptions,
-            canFetchMore: !!generatedFMOptions,
             options,
             hash,
             key
+        }
+        if (getFetchMore) {
+            const generatedFMOptions = getFetchMore(
+                payload,
+                selectedData,
+                options,
+                hash
+            )
+            action.fetchMoreOptions = generatedFMOptions
+            action.canFetchMore = !!generatedFMOptions
         }
         dispatch(action)
         if (mountedRef.current) {
@@ -35,6 +37,7 @@ export default ({
                 error: null,
                 isLoading: false,
                 isRefetching: false,
+                onSuccessData: payload,
                 cache: 'cache-first'
             }))
         }

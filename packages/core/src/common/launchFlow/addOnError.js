@@ -1,4 +1,4 @@
-import { Types } from '../utils'
+import { LauncFlowTypes } from './enums'
 
 export default ({
     toType,
@@ -11,7 +11,7 @@ export default ({
 }) => ({
     onError: payload => {
         const action = {
-            type: toType(Types.Error),
+            type: toType(LauncFlowTypes.Error),
             payload,
             hash,
             key
