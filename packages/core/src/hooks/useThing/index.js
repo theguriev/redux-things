@@ -15,6 +15,7 @@ import {
     promiseCache,
     preFethPromise,
     launchFlow,
+    preFetchFlow,
     LauncFlowTypes
 } from '@/common'
 import {
@@ -72,7 +73,7 @@ export const useThing = (
     })
     const { dispatch, getState } = useStore()
     const initialDataFn = toFunction(initialData)
-    const selectedData = useSelector(state => selector(state, options, key))
+    const selectedData = useSelector(state => selector(state, options, { toType, key }))
     const data = _cache === 'no-cache' ? null : selectedData
     const isInitial = data === null
     const mountedRef = useMounted()
@@ -119,19 +120,17 @@ export const useThing = (
     )
 
     const refetch = useCallback(() => launch({ ...options, isRefetch: true }), [options, launch])
-    const preFetch = useCallback((extendOptions = {}) => {
-        const cacheOptions = typeof options === 'object' ? { ...options, __THING_KEY__: key, ...extendOptions } : options
-        const hash = objectToHashFn(cacheOptions)
-        return preFethPromise({
-            hash,
-            promiseFn: () => fetchFn({
-                options: cacheOptions,
-                dispatch,
-                getState,
-                extra
-            })
+    const preFetch = useCallback((extendOptions = {}) => preFethPromise(
+        preFetchFlow({
+            launchOptions: { ...options, ...extendOptions },
+            key,
+            fetchFn,
+            objectToHashFn,
+            dispatch,
+            getState,
+            extra
         })
-    }, [options, fetchFn, dispatch, getState, extra, objectToHashFn, key])
+    ), [options, fetchFn, dispatch, getState, extra, objectToHashFn, key])
 
     const fetchMore = useCallback(
         newOptions => {

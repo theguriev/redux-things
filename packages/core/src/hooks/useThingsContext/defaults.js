@@ -1,4 +1,4 @@
-import objectHash from 'object-hash'
+import { objectHash as objectToHashFn } from '@/utils'
 
 export const defaultReducer = (state, { type, payload: data }, { toType }) => {
     if (type === toType('fulfilled')) {
@@ -10,7 +10,7 @@ export const defaultReducer = (state, { type, payload: data }, { toType }) => {
     return state || {}
 }
 
-export const defaultSelector = (state, _options, key) => state?.[key]?.data || null
+export const defaultSelector = (state, _options, { key }) => state?.[key]?.data || null
 
 export const thingsDefaults = {
     selector: defaultSelector,
@@ -29,5 +29,5 @@ export const thingsDefaults = {
     refetchIntervalInBackground: false,
     namespace: '@redux-things',
     delimiter: '/',
-    objectToHashFn: object => objectHash(object, { unorderedObjects: true })
+    objectToHashFn
 }

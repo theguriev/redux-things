@@ -19,4 +19,14 @@ export const launchFlow = flow(
     )
 )
 
+export const preFetchFlow = flow(
+    ...(
+        [
+            addOptions,
+            addHash,
+            addPromiseFn
+        ].map(propsWrapper)
+    )
+)
+
 export * from './enums'
