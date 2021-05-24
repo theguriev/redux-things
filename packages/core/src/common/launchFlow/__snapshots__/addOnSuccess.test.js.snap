@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`addOnSuccess add onSuccess option 1`] = `
+Array [
+  Object {
+    "canFetchMore": true,
+    "fetchMoreOptions": Object {
+      "fetchMoreOptions": "willBeHere",
+    },
+    "hash": "hash",
+    "key": "TKey",
+    "options": Object {
+      "abc": 123,
+    },
+    "payload": Object {
+      "testing": true,
+    },
+    "type": "fulfilled",
+  },
+]
+`;
+
+exports[`addOnSuccess add onSuccess option 2`] = `
+Object {
+  "cache": "cache-first",
+  "error": null,
+  "initial": true,
+  "isLoading": false,
+  "isRefetching": false,
+  "onSuccessData": Object {
+    "testing": true,
+  },
+}
+`;
+
+exports[`addOnSuccess add onSuccess option 3`] = `
+Object {
+  "canFetchMore": true,
+  "fetchMoreOptions": Object {
+    "fetchMoreOptions": "willBeHere",
+  },
+  "hash": "hash",
+  "key": "TKey",
+  "options": Object {
+    "abc": 123,
+  },
+  "payload": Object {
+    "testing": true,
+  },
+  "type": "fulfilled",
+}
+`;

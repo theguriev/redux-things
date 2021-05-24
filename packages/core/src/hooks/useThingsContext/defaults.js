@@ -1,7 +1,7 @@
-import { NAMESPACE } from '@/constants'
+import objectHash from 'object-hash'
 
-export const defaultReducer = (state, { type, payload: data }, key) => {
-    if (type === `${NAMESPACE}/${key}/fulfilled`) {
+export const defaultReducer = (state, { type, payload: data }, { toType }) => {
+    if (type === toType('fulfilled')) {
         return {
             ...state,
             data
@@ -26,5 +26,8 @@ export const thingsDefaults = {
     options: null,
     reFetchOnWindowFocus: false,
     reFetchInterval: null,
-    reFetchIntervalInBackground: false
+    reFetchIntervalInBackground: false,
+    namespace: '@redux-things',
+    delimiter: '/',
+    objectToHashFn: object => objectHash(object, { unorderedObjects: true })
 }

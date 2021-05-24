@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react-hooks'
-import { reduxContextProvider as wrapper } from '@/mocks'
+import { reduxContextProvider as wrapper } from '@redux-things/mocks'
 import { useThing } from '.'
 
 describe('useThing', () => {
@@ -140,8 +140,8 @@ describe('useThing', () => {
 
     test('fetchMore feature', async () => {
         const MAX_ITEMS = 10
-        const reducer = (state, { type, payload: data }, key) => {
-            if (type === `${useThing.NAMESPACE}/${key}/fulfilled`) {
+        const reducer = (state, { type, payload: data }, { toType }) => {
+            if (type === toType(useThing.Types.Fulfilled)) {
                 return {
                     ...state,
                     data: [
@@ -154,7 +154,7 @@ describe('useThing', () => {
         }
         const { result, waitForValueToChange } = renderHook(
             () => useThing(
-                'EFetchMoreEntity',
+                'TFetchMoreEntity',
                 ({ options: { limit, offset } }) => Promise.resolve(
                     Array
                         .from({ length: 10 })
@@ -193,7 +193,7 @@ describe('useThing', () => {
     test('reFetch feature', async () => {
         const { result, waitForValueToChange } = renderHook(
             () => useThing(
-                'ERefetchEntity',
+                'TRefetchEntity',
                 () => Promise.resolve('hello world')
             ),
             { wrapper },

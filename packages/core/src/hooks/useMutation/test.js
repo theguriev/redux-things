@@ -1,12 +1,12 @@
 import { renderHook, act } from '@testing-library/react-hooks'
-import { reduxContextProvider as wrapper } from '@/mocks'
+import { reduxContextProvider as wrapper } from '@redux-things/mocks'
 import { useMutation } from '.'
 
 describe('useMutation', () => {
     test('basic mutation', async () => {
         const { result, waitForValueToChange } = renderHook(
             () => useMutation(
-                options => Promise.resolve(`Here we will send some data to the server 😇 ${options.test}`)
+                ({ options }) => Promise.resolve(`Here we will send some data to the server 😇 ${options.test}`)
             ),
             { wrapper }
         )

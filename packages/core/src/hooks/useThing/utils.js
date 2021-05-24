@@ -1,12 +1,15 @@
-import { NAMESPACE } from '@/constants'
+export const Types = {
+    Pending: 'pending',
+    Fulfilled: 'fulfilled',
+    Error: 'error'
+}
 
-export const entityReducer = (
+export const thingReducer = (
     state,
     { type, fetchMoreOptions, canFetchMore },
-    key
+    { toType }
 ) => {
-    const targetType = `${NAMESPACE}/${key}/fulfilled`
-    if (type === targetType) {
+    if (type === toType(Types.Fulfilled)) {
         return {
             ...state,
             fetchMoreOptions,

@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`addOnError add onError option | mounted 1`] = `
+Array [
+  Object {
+    "hash": "hash",
+    "key": "TKey",
+    "payload": Object {
+      "testing": true,
+    },
+    "type": "error",
+  },
+]
+`;
+
+exports[`addOnError add onError option | mounted 2`] = `
+Object {
+  "cache": "cache-first",
+  "error": Object {
+    "testing": true,
+  },
+  "initial": true,
+  "isLoading": false,
+  "isRefetching": false,
+}
+`;
+
+exports[`addOnError add onError option | mounted 3`] = `
+Object {
+  "hash": "hash",
+  "key": "TKey",
+  "payload": Object {
+    "testing": true,
+  },
+  "type": "error",
+}
+`;
