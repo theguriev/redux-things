@@ -36,6 +36,6 @@ export const useInjectReducer = (key, reducer) => {
         return () => {
             store.withdrawReducer(key)
         }
-    }, [])
+    }, [key, reducer, store])
     return store
 }

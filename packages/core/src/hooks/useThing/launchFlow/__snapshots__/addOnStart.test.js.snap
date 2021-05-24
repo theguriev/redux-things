@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`addOnStart add onStart option 1`] = `
+Array [
+  Object {
+    "hash": "hash",
+    "key": "TKey",
+    "type": "pending",
+  },
+]
+`;
+
+exports[`addOnStart add onStart option 2`] = `
+Object {
+  "initial": true,
+  "isLoading": true,
+  "isRefetching": false,
+}
+`;
+
+exports[`addOnStart add onStart option 3`] = `
+Object {
+  "hash": "hash",
+  "key": "TKey",
+  "type": "pending",
+}
+`;

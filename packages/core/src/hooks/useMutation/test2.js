@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react-hooks'
-import { reduxContextProvider as wrapper } from '@/mocks'
+import { reduxContextProvider as wrapper } from '@redux-things/mocks'
 import { useMutation } from '.'
 
 describe('useMutation', () => {

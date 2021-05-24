@@ -73,9 +73,9 @@ export const useThing = (
     const data = _cache === 'no-cache' ? null : selectedData
     const isInitial = data === null
     const mountedRef = useMounted()
-    const internalReducer = useCallback(
-        flow(partialRight(thingReducer, { toType }), partialRight(reducer, { toType })),
-        [reducer, toType]
+    const internalReducer = flow(
+        partialRight(thingReducer, { toType }),
+        partialRight(reducer, { toType })
     )
     const launch = useCallback(
         launchOptions => promiseCache(
@@ -99,6 +99,7 @@ export const useThing = (
         ),
         [
             fetchFn,
+            mountedRef,
             getFetchMore,
             selectedData,
             setState,
@@ -106,7 +107,6 @@ export const useThing = (
             getState,
             extra,
             objectToHashFn,
-            options,
             toType,
             key,
             onStart,
@@ -128,7 +128,7 @@ export const useThing = (
                 extra
             })
         })
-    }, [options, fetchFn, dispatch, getState, extra, objectToHashFn])
+    }, [options, fetchFn, dispatch, getState, extra, objectToHashFn, key])
 
     const fetchMore = useCallback(
         newOptions => {
@@ -155,7 +155,7 @@ export const useThing = (
         if (!error && !skip && (!isLoading || _cache === 'no-cache') && !data) {
             launch(options)
         }
-    }, [skip, error, isLoading, options])
+    }, [skip, error, isLoading, options, _cache, launch])
 
     const raw = data || initialDataFn(options)
     const mappedData = dataMapper(raw, { isLoading, isRefetching, isInitial })
@@ -173,7 +173,7 @@ export const useThing = (
         if (reFetchOnWindowFocus && hasFocus && !isFirstTime) {
             reFetch()
         }
-    }, [hasFocus, reFetchOnWindowFocus, isFirstTime])
+    }, [hasFocus, reFetchOnWindowFocus, isFirstTime, reFetch])
 
     return {
         error,
