@@ -158,6 +158,8 @@ export const useThing = (
         if (!error && !skip && (!isLoading || _cache === 'no-cache') && !data) {
             launch(options)
         }
+    // We can't add here data beacuse then here will be infinity loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [skip, error, isLoading, options, _cache, launch])
 
     const raw = data || initialDataFn(options)

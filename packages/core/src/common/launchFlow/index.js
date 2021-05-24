@@ -1,10 +1,10 @@
 import { propsWrapper, flow } from '@/utils'
-import { default as addOptions } from './addOptions'
-import { default as addHash } from './addHash'
-import { default as addPromiseFn } from './addPromiseFn'
-import { default as addOnStart } from './addOnStart'
-import { default as addOnSuccess } from './addOnSuccess'
-import { default as addOnError } from './addOnError'
+import addOptions from './addOptions'
+import addHash from './addHash'
+import addPromiseFn from './addPromiseFn'
+import addOnStart from './addOnStart'
+import addOnSuccess from './addOnSuccess'
+import addOnError from './addOnError'
 
 export const launchFlow = flow(
     ...(
