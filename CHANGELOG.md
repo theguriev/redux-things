@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/theguriev/redux-things/compare/v1.4.4...v1.5.0) (2021-05-24)
+
+
+### Features
+
+* **core:** add useCompareEffect ([6b2a72e](https://github.com/theguriev/redux-things/commit/6b2a72e460a71c221f8ae7a2139c815bd05249b1))
+* **core:** move everything to launch flow folder ([f060185](https://github.com/theguriev/redux-things/commit/f0601857c0301a0dcdadece7f49bc39acf7c8616))
+* **core:** remove constants ([57040e0](https://github.com/theguriev/redux-things/commit/57040e0cc4dc6f0d3ced6eb65f8862848ad7990d))
+
+
+
+
+
 ## [1.4.4](https://github.com/theguriev/redux-entities/compare/v1.4.3...v1.4.4) (2021-05-18)
 
 **Note:** Version bump only for package redux-things
