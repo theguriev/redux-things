@@ -17,7 +17,8 @@ const {
     reFetch,
     fetchMore,
     preFetch,
-    canFetchMore
+    canFetchMore,
+    toType
 } = useThing(
     thingKey,
     fetchFn,
@@ -90,3 +91,4 @@ fetchMore()
 ```
 * `preFetch: Function` - a function to manually prefetch the thing.
 * `canFetchMore: boolean` - the result of getFetchMore function.
+* `toType: Function` - a function to generate type based on string. Example: toType('something') === `${namespace}/${key}/something`

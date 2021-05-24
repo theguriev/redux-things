@@ -67,6 +67,7 @@ export const useMutation = (
         isError: !!error,
         error,
         data: onSuccessData,
-        mutate
+        mutate,
+        toType
     }
 }

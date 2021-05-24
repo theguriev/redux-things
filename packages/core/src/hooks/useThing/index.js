@@ -191,7 +191,8 @@ export const useThing = (
         refetch,
         fetchMore,
         preFetch,
-        canFetchMore
+        canFetchMore,
+        toType
     }
 }
 
