@@ -24,9 +24,9 @@ export const thingsDefaults = {
     skip: false,
     cache: 'cache-first',
     options: null,
-    reFetchOnWindowFocus: false,
-    reFetchInterval: null,
-    reFetchIntervalInBackground: false,
+    refetchOnWindowFocus: false,
+    refetchInterval: null,
+    refetchIntervalInBackground: false,
     namespace: '@redux-things',
     delimiter: '/',
     objectToHashFn: object => objectHash(object, { unorderedObjects: true })

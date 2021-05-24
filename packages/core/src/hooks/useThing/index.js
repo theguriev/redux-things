@@ -44,16 +44,16 @@ export const useThing = (
         skip,
         cache,
         options: externalOptions = {},
-        reFetchOnWindowFocus,
-        reFetchInterval,
-        reFetchIntervalInBackground,
+        refetchOnWindowFocus,
+        refetchInterval,
+        refetchIntervalInBackground,
         namespace,
         delimiter,
         ...extra
     } = useThingsContext(hookOptions)
 
     const toType = partial(restImplode, delimiter, namespace, key)
-    const { hasFocus, isFirstTime } = useWindowFocus(!reFetchOnWindowFocus)
+    const { hasFocus, isFirstTime } = useWindowFocus(!refetchOnWindowFocus)
     const canFetchMore = useSelector(state => !!state?.[key]?.canFetchMore)
     const fetchMoreOptions = useSelector(state => state?.[key]?.fetchMoreOptions)
     const [{
@@ -118,7 +118,7 @@ export const useThing = (
         ]
     )
 
-    const reFetch = useCallback(() => launch({ ...options, isRefetch: true }), [options, launch])
+    const refetch = useCallback(() => launch({ ...options, isRefetch: true }), [options, launch])
     const preFetch = useCallback((extendOptions = {}) => {
         const cacheOptions = typeof options === 'object' ? { ...options, __THING_KEY__: key, ...extendOptions } : options
         const hash = objectToHashFn(cacheOptions)
@@ -164,21 +164,21 @@ export const useThing = (
 
     const raw = data || initialDataFn(options)
     const mappedData = dataMapper(raw, { isLoading, isRefetching, isInitial })
-    const reFetchIntervalFn = () => {
-        if (hasFocus || reFetchIntervalInBackground) {
-            reFetch()
+    const refetchIntervalFn = () => {
+        if (hasFocus || refetchIntervalInBackground) {
+            refetch()
         }
     }
 
-    useInterval(reFetchIntervalFn, reFetchInterval)
+    useInterval(refetchIntervalFn, refetchInterval)
 
     useInjectReducer(key, internalReducer)
 
     useEffect(() => {
-        if (reFetchOnWindowFocus && hasFocus && !isFirstTime) {
-            reFetch()
+        if (refetchOnWindowFocus && hasFocus && !isFirstTime) {
+            refetch()
         }
-    }, [hasFocus, reFetchOnWindowFocus, isFirstTime, reFetch])
+    }, [hasFocus, refetchOnWindowFocus, isFirstTime, refetch])
 
     return {
         error,
@@ -188,7 +188,7 @@ export const useThing = (
         isInitial,
         data: raw,
         mappedData,
-        reFetch,
+        refetch,
         fetchMore,
         preFetch,
         canFetchMore

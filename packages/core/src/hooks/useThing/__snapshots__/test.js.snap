@@ -13,7 +13,7 @@ Array [
     "isRefetching": false,
     "mappedData": null,
     "preFetch": [Function],
-    "reFetch": [Function],
+    "refetch": [Function],
   },
   Object {
     "canFetchMore": false,
@@ -26,7 +26,7 @@ Array [
     "isRefetching": false,
     "mappedData": null,
     "preFetch": [Function],
-    "reFetch": [Function],
+    "refetch": [Function],
   },
   Object {
     "canFetchMore": false,
@@ -39,7 +39,7 @@ Array [
     "isRefetching": false,
     "mappedData": "hello world",
     "preFetch": [Function],
-    "reFetch": [Function],
+    "refetch": [Function],
   },
   Object {
     "canFetchMore": false,
@@ -52,12 +52,12 @@ Array [
     "isRefetching": false,
     "mappedData": "hello world",
     "preFetch": [Function],
-    "reFetch": [Function],
+    "refetch": [Function],
   },
 ]
 `;
 
-exports[`useThing reFetch feature 1`] = `
+exports[`useThing refetch feature 1`] = `
 Array [
   Object {
     "canFetchMore": false,
@@ -70,7 +70,7 @@ Array [
     "isRefetching": false,
     "mappedData": null,
     "preFetch": [Function],
-    "reFetch": [Function],
+    "refetch": [Function],
   },
   Object {
     "canFetchMore": false,
@@ -83,7 +83,7 @@ Array [
     "isRefetching": false,
     "mappedData": null,
     "preFetch": [Function],
-    "reFetch": [Function],
+    "refetch": [Function],
   },
   Object {
     "canFetchMore": false,
@@ -96,7 +96,7 @@ Array [
     "isRefetching": false,
     "mappedData": "hello world",
     "preFetch": [Function],
-    "reFetch": [Function],
+    "refetch": [Function],
   },
   Object {
     "canFetchMore": false,
@@ -109,7 +109,7 @@ Array [
     "isRefetching": false,
     "mappedData": "hello world",
     "preFetch": [Function],
-    "reFetch": [Function],
+    "refetch": [Function],
   },
   Object {
     "canFetchMore": false,
@@ -122,7 +122,7 @@ Array [
     "isRefetching": true,
     "mappedData": "hello world",
     "preFetch": [Function],
-    "reFetch": [Function],
+    "refetch": [Function],
   },
   Object {
     "canFetchMore": false,
@@ -135,7 +135,7 @@ Array [
     "isRefetching": false,
     "mappedData": "hello world",
     "preFetch": [Function],
-    "reFetch": [Function],
+    "refetch": [Function],
   },
 ]
 `;
