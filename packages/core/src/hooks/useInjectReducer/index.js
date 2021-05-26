@@ -20,7 +20,7 @@ export const setupAsyncReducers = (store, staticReducer) => {
         store.updateReducer()
     }
     store.withdrawReducer = key => {
-        store.asyncReducer = omit(store.asyncReducers, [key])
+        store.asyncReducers = omit(store.asyncReducers, [key])
         store.updateReducer()
     }
     return store
@@ -33,9 +33,13 @@ export const useInjectReducer = (key, reducer) => {
         if (!store.asyncReducers[key]) {
             store.injectReducer(key, reducer)
         }
-        return () => {
-            store.withdrawReducer(key)
-        }
+        // If we uncomment this, then at each mounting / unmount,
+        // the state will be restored by running it through the reducer.
+        // It's not very good for performance.
+        // But this assumes that the reducer does not change for a particular key.
+        // return () => {
+        //     store.withdrawReducer(key)
+        // }
     }, [key, reducer, store])
     return store
 }

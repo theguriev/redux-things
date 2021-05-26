@@ -1,3 +1,4 @@
+import { omit } from 'lodash-es'
 import { propsWrapper, flow } from '@/utils'
 import addOptions from './addOptions'
 import addHash from './addHash'
@@ -34,7 +35,9 @@ export const selectFlow = flow(
         [
             addOptions,
             addHash
-        ].map(propsWrapper)
+        ]
+            .map(propsWrapper)
+            .concat(value => omit(value, ['launchOptions', 'objectToHashFn']))
     )
 )
 

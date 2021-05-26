@@ -54,7 +54,10 @@ export const useThing = (
         ...extra
     } = useThingsContext(hookOptions)
 
-    const toType = partial(restImplode, delimiter, namespace, key)
+    const toType = useCallback(
+        partial(restImplode, delimiter, namespace, key),
+        [delimiter, namespace]
+    )
     const { hasFocus, isFirstTime } = useWindowFocus(!refetchOnWindowFocus)
     const canFetchMore = useSelector(state => !!state?.[key]?.canFetchMore)
     const fetchMoreOptions = useSelector(state => state?.[key]?.fetchMoreOptions)
@@ -88,9 +91,11 @@ export const useThing = (
     const data = _cache === 'no-cache' ? null : selectedData
     const isInitial = data === null
     const mountedRef = useMounted()
-    const internalReducer = flow(
-        partialRight(thingReducer, { toType }),
-        partialRight(reducer, { toType })
+    const internalReducer = useCallback(
+        flow(
+            partialRight(thingReducer, { toType }),
+            partialRight(reducer, { toType })
+        ), [reducer, toType]
     )
     const launch = useCallback(
         launchOptions => promiseCache(
