@@ -3,6 +3,11 @@
 exports[`useMutation basic mutation 1`] = `
 Array [
   Object {
+    "actions": Object {
+      "error": [Function],
+      "fulfilled": [Function],
+      "pending": [Function],
+    },
     "data": null,
     "error": null,
     "isError": false,
@@ -11,6 +16,11 @@ Array [
     "toType": [Function],
   },
   Object {
+    "actions": Object {
+      "error": [Function],
+      "fulfilled": [Function],
+      "pending": [Function],
+    },
     "data": null,
     "error": null,
     "isError": false,
@@ -19,6 +29,11 @@ Array [
     "toType": [Function],
   },
   Object {
+    "actions": Object {
+      "error": [Function],
+      "fulfilled": [Function],
+      "pending": [Function],
+    },
     "data": "Here we will send some data to the server 😇 TEST OPTIONS",
     "error": null,
     "isError": false,

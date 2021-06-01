@@ -1,8 +1,8 @@
 import {
-    toType,
     dispatch,
     setState,
-    noop
+    noop,
+    launchFlowActions as actions
 } from '@redux-things/mocks'
 import addOnError from './addOnError'
 
@@ -12,7 +12,7 @@ describe('addOnError', () => {
         setState({ initial: true })
         let onErrorHasBeenCalled = false
         const { onError } = addOnError({
-            toType,
+            actions,
             hash: 'hash',
             key: 'TKey',
             dispatch,
@@ -32,7 +32,7 @@ describe('addOnError', () => {
     test('add onError option | unmounted', async () => {
         setState({ nothing: { should: { change: true } } })
         const { onError } = addOnError({
-            toType,
+            actions,
             hash: 'hash',
             key: 'TKey',
             dispatch,

@@ -1,4 +1,8 @@
-import { toType, dispatch, setState } from '@redux-things/mocks'
+import {
+    launchFlowActions as actions,
+    dispatch,
+    setState
+} from '@redux-things/mocks'
 import addOnStart from './addOnStart'
 
 describe('addOnStart', () => {
@@ -6,7 +10,7 @@ describe('addOnStart', () => {
         dispatch.clear()
         let onStartHasBeenCalled = false
         const { onStart } = addOnStart({
-            toType,
+            actions,
             hash: 'hash',
             key: 'TKey',
             dispatch,

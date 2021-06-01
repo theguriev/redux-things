@@ -92,3 +92,7 @@ fetchMore()
 * `preFetch: Function` - a function to manually prefetch the thing.
 * `canFetchMore: boolean` - the result of getFetchMore function.
 * `toType: Function` - a function to generate type based on string. Example: toType('something') === `${namespace}/${key}/something`
+* `actions`
+    * `pending: Function` - pending action creator function.
+    * `fulfilled: Function` - fulfilled action creator function.
+    * `error: Function` - error action creator function.

@@ -1,5 +1,6 @@
 import {
     useEffect,
+    useMemo,
     useState,
     useCallback
 } from 'react'
@@ -17,7 +18,8 @@ import {
     launchFlow,
     preFetchFlow,
     selectFlow,
-    LauncFlowTypes
+    LauncFlowTypes,
+    createLaunchFlowActions
 } from '@/common'
 import {
     thingReducer
@@ -54,10 +56,12 @@ export const useThing = (
         ...extra
     } = useThingsContext(hookOptions)
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const toType = useCallback(
         partial(restImplode, delimiter, namespace, key),
         [delimiter, namespace]
     )
+    const actions = useMemo(() => createLaunchFlowActions(toType), [toType])
     const { hasFocus, isFirstTime } = useWindowFocus(!refetchOnWindowFocus)
     const canFetchMore = useSelector(state => !!state?.[key]?.canFetchMore)
     const fetchMoreOptions = useSelector(state => state?.[key]?.fetchMoreOptions)
@@ -100,6 +104,7 @@ export const useThing = (
     const launch = useCallback(
         launchOptions => promiseCache(
             launchFlow({
+                actions,
                 fetchFn,
                 getFetchMore,
                 selectedData,
@@ -109,7 +114,6 @@ export const useThing = (
                 extra,
                 objectToHashFn,
                 launchOptions,
-                toType,
                 key,
                 mountedRef,
                 onStart,
@@ -127,11 +131,11 @@ export const useThing = (
             getState,
             extra,
             objectToHashFn,
-            toType,
             key,
             onStart,
             onSuccess,
-            onError
+            onError,
+            actions
         ]
     )
 
@@ -207,7 +211,8 @@ export const useThing = (
         fetchMore,
         preFetch,
         canFetchMore,
-        toType
+        toType,
+        actions
     }
 }
 

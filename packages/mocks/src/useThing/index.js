@@ -1,7 +1,6 @@
 import { isFunction } from 'lodash-es'
 
 export const objectToHashFn = JSON.stringify
-export const toType = v => v
 
 export const dispatch = action => {
     dispatch.actions = [...dispatch.actions, action]

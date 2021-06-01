@@ -1,10 +1,10 @@
-import { LauncFlowTypes } from './enums'
-
 export default ({
     getFetchMore = false,
     selectedData = null,
     options,
-    toType,
+    actions: {
+        fulfilled
+    },
     mountedRef,
     dispatch,
     setState,
@@ -13,13 +13,12 @@ export default ({
     hash
 }) => ({
     onSuccess: payload => {
-        const action = {
-            type: toType(LauncFlowTypes.Fulfilled),
+        const action = fulfilled({
             payload,
             options,
             hash,
             key
-        }
+        })
         if (getFetchMore) {
             const generatedFMOptions = getFetchMore(
                 payload,

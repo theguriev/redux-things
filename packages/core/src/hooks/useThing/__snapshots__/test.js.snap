@@ -3,6 +3,11 @@
 exports[`useThing basic scenario 1`] = `
 Array [
   Object {
+    "actions": Object {
+      "error": [Function],
+      "fulfilled": [Function],
+      "pending": [Function],
+    },
     "canFetchMore": false,
     "data": null,
     "error": null,
@@ -17,6 +22,11 @@ Array [
     "toType": [Function],
   },
   Object {
+    "actions": Object {
+      "error": [Function],
+      "fulfilled": [Function],
+      "pending": [Function],
+    },
     "canFetchMore": false,
     "data": null,
     "error": null,
@@ -31,6 +41,11 @@ Array [
     "toType": [Function],
   },
   Object {
+    "actions": Object {
+      "error": [Function],
+      "fulfilled": [Function],
+      "pending": [Function],
+    },
     "canFetchMore": false,
     "data": "hello world",
     "error": null,
@@ -45,6 +60,11 @@ Array [
     "toType": [Function],
   },
   Object {
+    "actions": Object {
+      "error": [Function],
+      "fulfilled": [Function],
+      "pending": [Function],
+    },
     "canFetchMore": false,
     "data": "hello world",
     "error": null,
@@ -64,6 +84,11 @@ Array [
 exports[`useThing refetch feature 1`] = `
 Array [
   Object {
+    "actions": Object {
+      "error": [Function],
+      "fulfilled": [Function],
+      "pending": [Function],
+    },
     "canFetchMore": false,
     "data": null,
     "error": null,
@@ -78,6 +103,11 @@ Array [
     "toType": [Function],
   },
   Object {
+    "actions": Object {
+      "error": [Function],
+      "fulfilled": [Function],
+      "pending": [Function],
+    },
     "canFetchMore": false,
     "data": null,
     "error": null,
@@ -92,6 +122,11 @@ Array [
     "toType": [Function],
   },
   Object {
+    "actions": Object {
+      "error": [Function],
+      "fulfilled": [Function],
+      "pending": [Function],
+    },
     "canFetchMore": false,
     "data": "hello world",
     "error": null,
@@ -106,6 +141,11 @@ Array [
     "toType": [Function],
   },
   Object {
+    "actions": Object {
+      "error": [Function],
+      "fulfilled": [Function],
+      "pending": [Function],
+    },
     "canFetchMore": false,
     "data": "hello world",
     "error": null,
@@ -120,6 +160,11 @@ Array [
     "toType": [Function],
   },
   Object {
+    "actions": Object {
+      "error": [Function],
+      "fulfilled": [Function],
+      "pending": [Function],
+    },
     "canFetchMore": false,
     "data": "hello world",
     "error": null,
@@ -134,6 +179,11 @@ Array [
     "toType": [Function],
   },
   Object {
+    "actions": Object {
+      "error": [Function],
+      "fulfilled": [Function],
+      "pending": [Function],
+    },
     "canFetchMore": false,
     "data": "hello world",
     "error": null,

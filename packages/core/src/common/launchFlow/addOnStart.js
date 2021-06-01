@@ -1,8 +1,8 @@
-import { LauncFlowTypes } from './enums'
-
 export default ({
     dispatch,
-    toType,
+    actions: {
+        pending
+    },
     setState,
     hash,
     key,
@@ -10,11 +10,10 @@ export default ({
     onStart
 }) => ({
     onStart: () => {
-        const action = {
-            type: toType(LauncFlowTypes.Pending),
+        const action = pending({
             hash,
             key
-        }
+        })
         dispatch(action)
         setState(state => ({
             ...state,

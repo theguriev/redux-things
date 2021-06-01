@@ -1,7 +1,7 @@
-import { LauncFlowTypes } from './enums'
-
 export default ({
-    toType,
+    actions: {
+        error
+    },
     hash,
     key,
     dispatch,
@@ -10,12 +10,11 @@ export default ({
     onError
 }) => ({
     onError: payload => {
-        const action = {
-            type: toType(LauncFlowTypes.Error),
+        const action = error({
             payload,
             hash,
             key
-        }
+        })
         dispatch(action)
         if (mountedRef.current) {
             setState(state => ({

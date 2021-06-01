@@ -1,4 +1,8 @@
-import { toType, dispatch, setState } from '@redux-things/mocks'
+import {
+    launchFlowActions as actions,
+    dispatch,
+    setState
+} from '@redux-things/mocks'
 import addOnSuccess from './addOnSuccess'
 
 describe('addOnSuccess', () => {
@@ -11,7 +15,7 @@ describe('addOnSuccess', () => {
             getFetchMore: () => ({ fetchMoreOptions: 'willBeHere' }),
             selectedData: [],
             options: { abc: 123 },
-            toType,
+            actions,
             mountedRef: { current: true },
             dispatch,
             setState,

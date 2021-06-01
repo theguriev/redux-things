@@ -1,7 +1,11 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { useStore } from 'react-redux'
 import { partial } from 'lodash-es'
-import { promiseCache, launchFlow } from '@/common'
+import {
+    promiseCache,
+    launchFlow,
+    createLaunchFlowActions
+} from '@/common'
 import { restImplode } from '@/utils'
 import { useMounted } from '../useMounted'
 import { useMutationContext } from '../useMutationContext'
@@ -24,13 +28,18 @@ export const useMutation = (
         { isLoading, error, onSuccessData },
         setState
     ] = useState({ error: null, isLoading: false, onSuccessData: null })
-    const toType = partial(restImplode, delimiter, namespace, mutationKey)
+    const toType = useCallback(
+        partial(restImplode, delimiter, namespace, mutationKey),
+        [delimiter, namespace, mutationKey]
+    )
+    const actions = useMemo(() => createLaunchFlowActions(toType), [toType])
     const mountedRef = useMounted()
     const { dispatch, getState } = useStore()
 
     const mutate = useCallback(
         launchOptions => promiseCache(
             launchFlow({
+                actions,
                 fetchFn,
                 setState,
                 dispatch,
@@ -38,7 +47,6 @@ export const useMutation = (
                 extra,
                 objectToHashFn,
                 launchOptions,
-                toType,
                 key: mutationKey,
                 mountedRef,
                 onStart,
@@ -47,6 +55,7 @@ export const useMutation = (
             })
         ),
         [
+            actions,
             fetchFn,
             mountedRef,
             setState,
@@ -54,7 +63,6 @@ export const useMutation = (
             getState,
             extra,
             objectToHashFn,
-            toType,
             mutationKey,
             onStart,
             onSuccess,
@@ -64,6 +72,7 @@ export const useMutation = (
 
     return {
         isLoading,
+        actions,
         isError: !!error,
         error,
         data: onSuccessData,
