@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/theguriev/redux-things/compare/v1.6.2...v1.7.0) (2021-06-01)
+
+
+### Bug Fixes
+
+* **core:** infinity rerendering in internalReducer ([4593456](https://github.com/theguriev/redux-things/commit/4593456d3bc8de58293e45fb63d93ef0584c6dd4))
+
+
+### Features
+
+* **core:** add actions to returns ([999a9c2](https://github.com/theguriev/redux-things/commit/999a9c2975c7069b6d896aa1172dc64eb6e781a9))
+
+
+
+
+
 ## [1.6.2](https://github.com/theguriev/redux-things/compare/v1.6.1...v1.6.2) (2021-05-24)
 
 **Note:** Version bump only for package @redux-things/core
