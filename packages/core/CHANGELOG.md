@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/theguriev/redux-things/compare/v1.7.0...v1.8.0) (2021-06-01)
+
+
+### Features
+
+* **core:** add debounceInterval ([afd7482](https://github.com/theguriev/redux-things/commit/afd74821c0a19246abb6b5a4a2be3355059c6a64))
+
+
+
+
+
 # [1.7.0](https://github.com/theguriev/redux-things/compare/v1.6.2...v1.7.0) (2021-06-01)
 
 
