@@ -29,5 +29,6 @@ export const thingsDefaults = {
     refetchIntervalInBackground: false,
     namespace: '@redux-things',
     delimiter: '/',
-    objectToHashFn
+    objectToHashFn,
+    debounceInterval: 0
 }

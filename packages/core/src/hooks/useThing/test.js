@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals'
 import { renderHook, act } from '@testing-library/react-hooks'
 import { reduxContextProvider as wrapper } from '@redux-things/mocks'
 import { useThing } from '.'
@@ -207,5 +208,67 @@ describe('useThing', () => {
         })
         await waitForValueToChange(() => result.current.isLoading)
         expect(result.all).toMatchSnapshot()
+    })
+
+    test('debounce options changing', async () => {
+        const debounceInterval = 5
+        const callback = jest.fn().mockImplementation(({ options }) => Promise.resolve(options))
+        const { result, rerender, waitForValueToChange } = renderHook(
+            props => useThing(
+                'TDebounce',
+                callback,
+                {
+                    ...props,
+                    reducer: (state, { type, payload: data }, { toType }) => {
+                        if (type === toType('fulfilled')) {
+                            return {
+                                ...state,
+                                data: {
+                                    ...state.data,
+                                    [data.count]: data
+                                }
+                            }
+                        }
+                        return state || {}
+                    },
+                    selector: (state, { key, options }) => (
+                        state?.[key]?.data?.[options.count] || null
+                    )
+                }
+            ),
+            {
+                wrapper,
+                initialProps: {
+                    debounceInterval,
+                    options: {
+                        count: 1
+                    }
+                }
+            }
+        )
+        await waitForValueToChange(() => result.current.isLoading)
+        expect(result.current.data.count).toBe(1)
+        expect(callback).toHaveBeenCalledTimes(1)
+        rerender({
+            debounceInterval,
+            options: {
+                count: 2
+            }
+        })
+        rerender({
+            debounceInterval,
+            options: {
+                count: 3
+            }
+        })
+        rerender({
+            debounceInterval,
+            options: {
+                count: 4
+            }
+        })
+        await waitForValueToChange(() => result.current)
+        expect(callback).toHaveBeenCalledTimes(2)
+        expect(result.current.data.count).toBe(4)
     })
 })

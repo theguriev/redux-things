@@ -4,7 +4,12 @@ import {
     useState,
     useCallback
 } from 'react'
-import { partialRight, partial, isEqual } from 'lodash-es'
+import {
+    partialRight,
+    partial,
+    isEqual,
+    debounce
+} from 'lodash-es'
 import { useSelector, useStore } from 'react-redux'
 import { useInterval } from 'react-use'
 import {
@@ -53,6 +58,7 @@ export const useThing = (
         refetchIntervalInBackground,
         namespace,
         delimiter,
+        debounceInterval,
         ...extra
     } = useThingsContext(hookOptions)
 
@@ -164,14 +170,30 @@ export const useThing = (
 
     // If hook props change we need to update internal options state as
     // internal state might be different with prev props due to change by fetch more action
+    const setDebounceState = useMemo(
+        () => {
+            if (debounceInterval) {
+                return debounce(newState => {
+                    setState(state => ({
+                        ...state, ...newState
+                    }))
+                }, debounceInterval)
+            }
+            return newState => {
+                setState(state => ({
+                    ...state, ...newState
+                }))
+            }
+        },
+        [debounceInterval, setState]
+    )
     useCompareEffect(() => {
         if (externalOptions) {
-            setState(state => ({
-                ...state,
+            setDebounceState({
                 options: externalOptions
-            }))
+            })
         }
-    }, [externalOptions], isEqual)
+    }, [externalOptions, setDebounceState], isEqual)
 
     useEffect(() => {
         if (!error && !skip && (!isLoading || _cache === 'no-cache') && !data) {

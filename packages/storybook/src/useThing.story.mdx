@@ -69,6 +69,12 @@ const {
 * `onStart: Function` - will be fired when fetching will be launched.
 * `onSuccess: Function` - when promise will resolved.
 * `onError: Function` - when promise will rejected.
+* `namespace: string` - global actions namespace. Default: `@redux-things`
+* `delimiter: string` - type delimiter. Using for separate type, key and namespace. Eample: @redux-things/TSomething/Fullfiled. Default: `/`
+* `debounceInterval: number` - changing options trigger debounce interval.
+namespace,
+        delimiter,
+        debounceInterval,
 * `...extra: any` - anything you wanna pass to fetchFn.  Usually, it's some API client or something like that.
 
 ## Returns
