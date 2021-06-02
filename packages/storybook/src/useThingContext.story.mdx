@@ -21,6 +21,10 @@ const {
     reFetchOnWindowFocus = false,
     reFetchInterval = null,
     reFetchIntervalInBackground = false,
+    namespace = '@redux-things',
+    delimiter = '/',
+    objectToHashFn = object => hash(object, { unorderedObjects: true }),
+    debounceInterval = 0,
     ...extra
 } = useThingsContext(somethingToMergeWithReturns)
 ```

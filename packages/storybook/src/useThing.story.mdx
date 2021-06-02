@@ -18,7 +18,12 @@ const {
     fetchMore,
     preFetch,
     canFetchMore,
-    toType
+    toType,
+    actions: {
+        pending,
+        fulfilled,
+        error
+    }
 } = useThing(
     thingKey,
     fetchFn,
@@ -37,6 +42,12 @@ const {
         reFetchOnWindowFocus,
         reFetchInterval,
         reFetchIntervalInBackground,
+        onStart,
+        onSuccess,
+        onError,
+        namespace,
+        delimiter,
+        debounceInterval,
         ...extra
     }
 )
