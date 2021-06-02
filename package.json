@@ -14,7 +14,8 @@
         "bootstrap": "cat logo.txt && lerna bootstrap",
         "build": "cat logo.txt && lerna run build",
         "storybook": "cat logo.txt && lerna run storybook --parallel",
-        "lint": "cat logo.txt && lerna run lint --parallel"
+        "lint": "cat logo.txt && lerna run lint --parallel",
+        "publish": "cat logo.txt && lerna publish from-git"
     },
     "dependencies": {
         "lodash-es": "^4.17.21",
