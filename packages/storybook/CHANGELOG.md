@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/theguriev/redux-things/compare/v1.8.0...v1.9.0) (2021-06-02)
+
+
+### Features
+
+* **storybook:** add debounceTime info ([5aeb9b9](https://github.com/theguriev/redux-things/commit/5aeb9b933987f9fa8d2ebf767c04a770192f2a47))
+
+
+
+
+
 # [1.8.0](https://github.com/theguriev/redux-things/compare/v1.7.0...v1.8.0) (2021-06-01)
 
 
