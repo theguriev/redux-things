@@ -1,3 +1,8 @@
+const converErrorToObject = error => ({
+    stack: error.stack,
+    message: error.message,
+    name: error.name
+})
 export default ({
     actions: {
         error
@@ -9,7 +14,10 @@ export default ({
     mountedRef,
     onError
 }) => ({
-    onError: payload => {
+    onError: errorObject => {
+        const payload = (
+            errorObject instanceof Error ? converErrorToObject(errorObject) : errorObject
+        )
         const action = error({
             payload,
             hash,
