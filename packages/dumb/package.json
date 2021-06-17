@@ -1,6 +1,6 @@
 {
-  "name": "dumb",
-  "version": "1.0.0",
+  "name": "@redux-things/dumb",
+  "version": "1.7.0",
   "description": "A bunch of dumb function to simplify working with data",
   "keywords": [
     "dumb",
@@ -11,9 +11,9 @@
   "homepage": "https://github.com/theguriev/redux-things\"",
   "license": "MIT",
   "main": "dist/index.js",
-  "files": [
-    "lib"
-  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/theguriev/redux-things.git"
