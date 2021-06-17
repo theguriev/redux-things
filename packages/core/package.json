@@ -60,8 +60,7 @@
         ]
     },
     "dependencies": {
-        "core-js": "^2.6.12",
-        "object-hash": "^2.1.1"
+        "core-js": "^2.6.12"
     },
     "devDependencies": {
         "@babel/cli": "^7.11.6",

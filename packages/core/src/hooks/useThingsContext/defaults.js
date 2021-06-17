@@ -1,4 +1,4 @@
-import { objectHash as objectToHashFn } from '@/utils'
+import { objectHash as objectToHashFn } from '@redux-things/dumb'
 
 export const defaultReducer = (state, { type, payload: data }, { toType }) => {
     if (type === toType('fulfilled')) {

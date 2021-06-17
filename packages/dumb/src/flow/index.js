@@ -1,3 +1,7 @@
+/**
+ * Classic flow is not good enough because it doesn't pass all arguments
+ * @param  {...any} funcs Whatever functions.
+ */
 export const flow = (...funcs) => {
     const { length } = funcs
     return (first, ...args) => {

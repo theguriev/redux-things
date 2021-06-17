@@ -12,11 +12,7 @@ import {
 } from 'lodash-es'
 import { useSelector, useStore } from 'react-redux'
 import { useInterval } from 'react-use'
-import {
-    toFunction,
-    flow,
-    restImplode
-} from '@/utils'
+import { implode, toFunction, flow } from '@redux-things/dumb'
 import {
     promiseCache,
     preFethPromise,
@@ -64,7 +60,7 @@ export const useThing = (
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const toType = useCallback(
-        partial(restImplode, delimiter, namespace, key),
+        partial(implode, delimiter, namespace, key),
         [delimiter, namespace]
     )
     const actions = useMemo(() => createLaunchFlowActions(toType), [toType])

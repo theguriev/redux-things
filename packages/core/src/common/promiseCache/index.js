@@ -1,4 +1,4 @@
-import { flow } from '@/utils'
+import { flow } from '@redux-things/dumb'
 
 export const cache = new Map()
 export const preFetchCache = new Map()

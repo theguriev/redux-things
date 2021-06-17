@@ -1,5 +1,5 @@
 import { omit } from 'lodash-es'
-import { propsWrapper, flow } from '@/utils'
+import { propsWrapper, flow } from '@redux-things/dumb'
 import addOptions from './addOptions'
 import addHash from './addHash'
 import addPromiseFn from './addPromiseFn'

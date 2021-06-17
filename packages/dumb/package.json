@@ -1,0 +1,70 @@
+{
+  "name": "dumb",
+  "version": "1.0.0",
+  "description": "A bunch of dumb function to simplify working with data",
+  "keywords": [
+    "dumb",
+    "functions",
+    "reducers"
+  ],
+  "author": "Eugen Guriev <eugen.guriev@doclerholding.com>",
+  "homepage": "https://github.com/theguriev/redux-things\"",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theguriev/redux-things.git"
+  },
+  "scripts": {
+    "build": "node build.js",
+    "watch": "watch 'npm run build' src",
+    "lint": "npx eslint --fix --ignore-path ../../.gitignore .",
+    "test": "jest",
+    "test:watch": "jest --watchAll"
+  },
+  "bugs": {
+    "url": "https://github.com/theguriev/redux-things/issues"
+  },
+  "dependencies": {
+    "object-hash": "^2.1.1"
+  },
+  "devDependencies": {
+    "babel-jest": "^26.6.3",
+    "eslint-plugin-jest": "^24.3.6",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.5"
+  },
+  "babel": {
+    "plugins": [
+        [
+            "module-resolver",
+            {
+                "root": [
+                    "./src"
+                ],
+                "alias": {
+                    "@": "./src"
+                }
+            }
+        ],
+        "dynamic-import-node",
+        "add-module-exports"
+    ],
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "targets": {
+                    "chrome": 78,
+                    "edge": 15,
+                    "esmodules": false
+                }
+            }
+        ],
+        "@babel/preset-react"
+    ]
+  }
+}

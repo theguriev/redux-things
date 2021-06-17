@@ -1,4 +1,4 @@
-import objectHash from 'object-hash'
+import { objectHash as objectToHashFn } from '@redux-things/dumb'
 
 export const mutationDefaults = {
     mutationKey: 'global',
@@ -7,5 +7,5 @@ export const mutationDefaults = {
     onError: () => {},
     namespace: '@redux-things/mutation',
     delimiter: '/',
-    objectToHashFn: object => objectHash(object, { unorderedObjects: true })
+    objectToHashFn
 }
