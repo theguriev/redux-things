@@ -1,12 +1,12 @@
 import { flow } from '../flow'
 
-export const wrap = (state, action, extra) => ({
+const wrap = (state, action, extra) => ({
     state,
     action,
     extra
 })
 
-export const getState = ({ state }) => state
+const getState = ({ state }) => state
 
 export const createReducer = (dict, def = {}) => (state, action, extra) => {
     const fn = dict[action.type]

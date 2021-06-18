@@ -1,4 +1,4 @@
-export const createActions = (strings, toType) => strings.reduce(
+export const createActions = (strings, toType = str => str) => strings.reduce(
     (acc, name) => ({
         ...acc,
         [name]: data => ({

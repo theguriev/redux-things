@@ -1,4 +1,5 @@
 export * from './createReducer'
+export * from './createActions'
 export * from './flow'
 export * from './implode'
 export * from './objectHash'
