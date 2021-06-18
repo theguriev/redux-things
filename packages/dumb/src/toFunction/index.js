@@ -1,3 +1,6 @@
-import { isFunction } from 'lodash-es'
+import { isFunction, cond, stubTrue } from 'lodash-es'
 
-export const toFunction = value => (isFunction(value) ? value : () => value)
+export const toFunction = value => cond([
+    [isFunction, v => v],
+    [stubTrue, v => () => v]
+])(value)
