@@ -41,16 +41,16 @@ describe('merge', () => {
                 abc3: 333
             }
         }
-        const newObject = merge(
+        const newObject = merge([
             [
                 () => ({ value: 111 }),
-                'data.sourceOption'
+                'targetOption'
             ],
             [
-                'targetOption',
+                'data.sourceOption',
                 'targetOption'
             ]
-        )(initialObject)
+        ])(initialObject)
         expect(newObject.targetOption.abc3).toBe(333)
         expect(newObject.targetOption.value).toBe(111)
         expect(newObject.targetOption.abc).toBe(111)

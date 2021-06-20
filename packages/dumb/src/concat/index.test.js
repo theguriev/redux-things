@@ -22,16 +22,16 @@ describe('concat', () => {
     })
 
     it('should concat arrays by value and path', async () => {
-        const newObject = concat(
+        const newObject = concat([
             [
                 'data.sourceOption.abc',
-                () => (['value'])
+                'targetOption.abc3'
             ],
             [
-                'targetOption.abc3',
+                () => (['value']),
                 'targetOption.abc3'
             ]
-        )(initialObject)
+        ])(initialObject)
         expect(newObject.targetOption.abc3).toEqual([6, 7, 8, 1, 2, 3, 'value'])
     })
 })
