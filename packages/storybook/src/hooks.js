@@ -1,5 +1,9 @@
-import { useThing, fakeFetch } from '@redux-things/core'
+import { useThing } from '@redux-things/core'
 import { KEY } from './constants'
+
+export const fakeFetch = (data, delay = 300) => new Promise(
+    resolve => setTimeout(() => resolve(data), delay)
+)
 
 export const useBasicEntity = props => useThing(
     KEY,

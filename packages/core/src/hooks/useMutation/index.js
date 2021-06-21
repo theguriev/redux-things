@@ -6,7 +6,7 @@ import {
     launchFlow,
     createLaunchFlowActions
 } from '@/common'
-import { restImplode } from '@/utils'
+import { implode } from '@redux-things/dumb'
 import { useMounted } from '../useMounted'
 import { useMutationContext } from '../useMutationContext'
 
@@ -29,7 +29,7 @@ export const useMutation = (
         setState
     ] = useState({ error: null, isLoading: false, onSuccessData: null })
     const toType = useCallback(
-        partial(restImplode, delimiter, namespace, mutationKey),
+        partial(implode, delimiter, namespace, mutationKey),
         [delimiter, namespace, mutationKey]
     )
     const actions = useMemo(() => createLaunchFlowActions(toType), [toType])
