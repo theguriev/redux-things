@@ -4,16 +4,16 @@ A library that allows you to quickly and easily synchronize your store with the 
 * [Documentation](https://theguriev.github.io/redux-things/index.html?path=/docs/getting-started-introduction--page)
 
 ### Features
-* *Skeletons*
+* **Skeletons**
 ![Skeletons](./assets/skeletons.gif)
-* *Auto refetching*
+* **Auto refetching**
 ![pooling](./assets/pooling.gif)
-* *Prefetch*
+* **Prefetch**
 ![prefetch](./assets/prefetch.gif)
-* *Window refocus refetching*
-* *Debouncing*
-* *Dependend things*
-* *And many more...*
+* **Window refocus refetching**
+* **Debouncing**
+* **Dependend things**
+* **And many more...**
 
 ### Summary
 
