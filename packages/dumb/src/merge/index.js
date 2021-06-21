@@ -1,21 +1,14 @@
-import {
-    get,
-    cond,
-    isFunction,
-    stubTrue
-} from 'lodash-es'
+import { get } from 'lodash-es'
 import { set } from '../set'
 import { multiple } from '../multiple'
+import { runOrDefault } from '../runOrDefault'
 
 const mergeOne = (obj, [source, target]) => set(
     obj,
     target,
     {
         ...get(obj, target, Object.create(null)),
-        ...cond([
-            [isFunction, fn => fn(obj)],
-            [stubTrue, path => get(obj, path, Object.create(null))]
-        ])(source)
+        ...runOrDefault(source, path => get(obj, path, Object.create(null)), obj)
     }
 )
 

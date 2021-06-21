@@ -1,21 +1,14 @@
-import {
-    get,
-    cond,
-    isFunction,
-    stubTrue
-} from 'lodash-es'
+import { get } from 'lodash-es'
 import { set } from '../set'
 import { multiple } from '../multiple'
+import { runOrDefault } from '../runOrDefault'
 
 const concatOne = (obj, [source, target]) => set(
     obj,
     target,
     [
         ...get(obj, target, []),
-        ...cond([
-            [isFunction, fn => fn(obj)],
-            [stubTrue, path => get(obj, path, [])]
-        ])(source)
+        ...runOrDefault(source, path => get(obj, path, []), obj)
     ]
 )
 
