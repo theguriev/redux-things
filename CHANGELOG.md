@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/theguriev/redux-things/compare/v1.9.0...v1.10.0) (2021-06-21)
+
+
+### Features
+
+* **core:** add error message to the payload error ([428b836](https://github.com/theguriev/redux-things/commit/428b83688756f6f975e567dcff5ab2337ef5a28c))
+* **dumb:** add concat ([54811e8](https://github.com/theguriev/redux-things/commit/54811e8b85dd887de911c8cf199a61557542cc5d))
+* **dumb:** add copy fn ([a2af8d2](https://github.com/theguriev/redux-things/commit/a2af8d2740d4d0de2ca41be33ea1c9edba8312cd))
+* **dumb:** add createActions ([d3c7201](https://github.com/theguriev/redux-things/commit/d3c72017028c0c04f35caa8eb607dbadbfba68d9))
+* **dumb:** add createActions ([e5596ed](https://github.com/theguriev/redux-things/commit/e5596ed9d0c23eef87067830c992baed6235e6b5))
+* **dumb:** add createReducer ([bcdff9a](https://github.com/theguriev/redux-things/commit/bcdff9a2ec0e13fa73101e720040640ee673bb6f))
+* **dumb:** add createReducer ([60ac45d](https://github.com/theguriev/redux-things/commit/60ac45dd4b03e4555f3b18c21bad47c0658a25ac))
+* **dumb:** add merge ([1168a0c](https://github.com/theguriev/redux-things/commit/1168a0c90597a4f95ad1830598d5d4069b6971de))
+* **dumb:** add multiple ([226152e](https://github.com/theguriev/redux-things/commit/226152ec05b5f74945f6f467b8b3e452fe7d98ed))
+* **dumb:** add runOrDefault function ([cff8608](https://github.com/theguriev/redux-things/commit/cff8608019e74df506fa80656b1adcee497151ed))
+* **dumb:** add set ([ba475ba](https://github.com/theguriev/redux-things/commit/ba475ba1c36387bc05bbb3b6679f9d8adbad6f91))
+* **dumb:** init ([a7691a1](https://github.com/theguriev/redux-things/commit/a7691a1c0529e4dd4cf27d3154b9984e1100e2eb))
+* **dumb:** working on dependencies ([a08e36a](https://github.com/theguriev/redux-things/commit/a08e36a25c3b83a8127d335312fea93ee86ff57f))
+
+
+
+
+
 # [1.9.0](https://github.com/theguriev/redux-things/compare/v1.8.0...v1.9.0) (2021-06-02)
 
 
