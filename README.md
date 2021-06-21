@@ -1,8 +1,19 @@
 <img src="./packages/storybook/src/assets/logo.png" alt="Redux Things" width="100%" />
 A library that allows you to quickly and easily synchronize your store with the server.
 
-* [Introduction](https://theguriev.github.io/redux-things/index.html?path=/docs/getting-started-introduction--page)
-* [Concepts](https://theguriev.github.io/redux-things/index.html?path=/docs/concepts-things--page)
+* [Documentation](https://theguriev.github.io/redux-things/index.html?path=/docs/getting-started-introduction--page)
+
+### Features
+* *Skeletons*
+![Skeletons](./assets/skeletons.gif)
+* *Auto refetching*
+![pooling](./assets/pooling.gif)
+* *Prefetch*
+![prefetch](./assets/prefetch.gif)
+* *Window refocus refetching*
+* *Debouncing*
+* *Dependend things*
+* *And many more...*
 
 ### Summary
 
