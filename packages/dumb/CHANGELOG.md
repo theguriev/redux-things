@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/theguriev/redux-things/compare/v1.10.1...v1.11.0) (2021-06-21)
+
+
+### Features
+
+* **dumb:** add exports to index ([d9b8748](https://github.com/theguriev/redux-things/commit/d9b87489f10b7d5830a28b464d1099b23daab9c4))
+
+
+
+
+
 # [1.10.0](https://github.com/theguriev/redux-things/compare/v1.9.0...v1.10.0) (2021-06-21)
 
 
