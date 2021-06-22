@@ -30,16 +30,16 @@ const {
 ```
 
 ## Options
-* `somethingToMergeWithReturns: Object` - any Record<string, unknow> which will be merged with options what was passed through ThingsContext. We use it inside the useThing hook so I have no idea why you might need it but anyway here is some info about it. U can set this global options like this:
+* `somethingToMergeWithReturns: Object` - any Record<string, unknow> which will be merged with options what was passed through ThingContext. We use it inside the useThing hook so I have no idea why you might need it but anyway here is some info about it. U can set this global options like this:
 ```js
-import { ThingsContext } from '@redux-things/core'
+import { ThingContext } from '@redux-things/core'
 
-<ThingsContext.Provider value={{
+<ThingContext.Provider value={{
     apiClient: () => console.log('U can reach this in fetchFn'),
     skip: true // all useThing will be skipped by default
 }}>
     <App />
-</ThingsContext.Provider>
+</ThingContext.Provider>
 ```
 
 ## Returns

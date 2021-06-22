@@ -1,7 +1,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import { setupAsyncReducers, ThingsContext } from '@redux-things/core'
+import { setupAsyncReducers, ThingContext } from '@redux-things/core'
 
 export const parameters = {
     options: {
@@ -35,9 +35,9 @@ export const StoreDecorator = (StoryFn) => (
 )
 
 export const ThingsDecorator = StoryFn => (
-    <ThingsContext.Provider value={{ apiClient: () => console.log('apiclient') }}>
+    <ThingContext.Provider value={{ apiClient: () => console.log('apiclient') }}>
         <StoryFn />
-    </ThingsContext.Provider>
+    </ThingContext.Provider>
 )
 
 export const decorators = [
