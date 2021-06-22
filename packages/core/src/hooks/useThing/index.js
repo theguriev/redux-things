@@ -28,7 +28,7 @@ import {
 import { useInjectReducer } from '../useInjectReducer'
 import { useMounted } from '../useMounted'
 import { useWindowFocus } from '../useWindowFocus'
-import { useThingsContext } from '../useThingsContext'
+import { useThingContext } from '../useThingContext'
 import { useCompareEffect } from '../useCompareEffect'
 
 export const useThing = (
@@ -56,7 +56,7 @@ export const useThing = (
         delimiter,
         debounceInterval,
         ...extra
-    } = useThingsContext(hookOptions)
+    } = useThingContext(hookOptions)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const toType = useCallback(
