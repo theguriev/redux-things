@@ -11,6 +11,7 @@ A library that allows you to quickly and easily synchronize your store with the 
 * **Prefetch**
 ![prefetch](https://raw.githubusercontent.com/theguriev/redux-things/master/assets/prefetch.gif)
 * **Window refocus refetching**
+![refocus](https://raw.githubusercontent.com/theguriev/redux-things/master/assets/refocus.gif)
 * **Debouncing**
 * **Dependend things**
 * **And many more...**
