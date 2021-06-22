@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.2](https://github.com/theguriev/redux-things/compare/v1.11.1...v1.11.2) (2021-06-22)
+
+
+### Features
+
+* **main:** add logo to publish ([2f16d85](https://github.com/theguriev/redux-things/commit/2f16d854aebc657bd4724a67f26fa3650c15f5e1))
+
+
+
+
+
 ## [1.11.1](https://github.com/theguriev/redux-things/compare/v1.11.0...v1.11.1) (2021-06-22)
 
 **Note:** Version bump only for package redux-things
