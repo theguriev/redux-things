@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.4](https://github.com/theguriev/redux-things/compare/v1.11.3...v1.11.4) (2021-08-12)
+
+
+### Bug Fixes
+
+* **core:** skip changing issue ([c4a799f](https://github.com/theguriev/redux-things/commit/c4a799ff3f371874f016a8a0a35b38526b2e54e3))
+
+
+
+
+
 ## [1.11.3](https://github.com/theguriev/redux-things/compare/v1.11.2...v1.11.3) (2021-06-22)
 
 **Note:** Version bump only for package redux-things
