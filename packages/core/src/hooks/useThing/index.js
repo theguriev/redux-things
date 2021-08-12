@@ -46,7 +46,7 @@ export const useThing = (
         onSuccess,
         onError,
         objectToHashFn,
-        skip,
+        skip: externalSkip,
         cache,
         options: externalOptions = {},
         refetchOnWindowFocus,
@@ -57,7 +57,6 @@ export const useThing = (
         debounceInterval,
         ...extra
     } = useThingContext(hookOptions)
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const toType = useCallback(
         partial(implode, delimiter, namespace, key),
@@ -72,14 +71,16 @@ export const useThing = (
         isLoading,
         isRefetching,
         cache: _cache,
-        options
+        options,
+        skip
     }, setState] = useState({
         isRefetching: false,
         isLoading: cache === 'no-cache',
         error: null,
         requestPromise: null,
         cache,
-        options: fetchMoreOptions || externalOptions
+        options: fetchMoreOptions || externalOptions,
+        skip: externalSkip
     })
     const { dispatch, getState } = useStore()
     const initialDataFn = toFunction(initialData)
@@ -183,6 +184,11 @@ export const useThing = (
         },
         [debounceInterval, setState]
     )
+
+    useEffect(() => {
+        setDebounceState({ skip: externalSkip })
+    }, [externalSkip, setDebounceState])
+
     useCompareEffect(() => {
         if (externalOptions) {
             setDebounceState({
