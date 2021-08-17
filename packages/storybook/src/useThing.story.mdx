@@ -63,7 +63,7 @@ const {
 * `reducer: Function` - classical redux reducer.
 * `selector: Function` - selector to select data from the store.
 * `initialData: Function | any` - if set, this value will be used as the initial data for the thing.
-* `getFetchMore = () => boolean | object` function to generate fetch options to fetchMore function.
+* `getFetchMore = ({ payload, selectedData, options, hash }) => boolean | object` function to generate fetch options to fetchMore function.
     * When new data is received for this thing, this function receives last options, last fetch result of the infinite list of data and the full array of all chunks.
     * Return `false` to indicate there is no next page available.
 * `dataMapper: Function` - data mapper function. It will prepare your data before showing it somewhere. Use *mappedData* as a result of dataMapper.
