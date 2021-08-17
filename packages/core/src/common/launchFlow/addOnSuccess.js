@@ -20,12 +20,12 @@ export default ({
             key
         })
         if (getFetchMore) {
-            const generatedFMOptions = getFetchMore(
+            const generatedFMOptions = getFetchMore({
                 payload,
                 selectedData,
                 options,
                 hash
-            )
+            })
             action.fetchMoreOptions = generatedFMOptions
             action.canFetchMore = !!generatedFMOptions
         }

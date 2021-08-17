@@ -164,7 +164,7 @@ describe('useThing', () => {
                 ),
                 {
                     initialData: [],
-                    getFetchMore: (current, all, { limit, offset }) => {
+                    getFetchMore: ({ options: { limit, offset } }) => {
                         if (limit + offset < MAX_ITEMS) {
                             return { limit, offset: offset + limit }
                         }
