@@ -98,6 +98,7 @@ export const useThing = (
     const data = _cache === 'no-cache' ? null : selectedData
     const isInitial = data === null
     const mountedRef = useMounted()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const internalReducer = useCallback(
         flow(
             partialRight(thingReducer, { toType }),

@@ -10,12 +10,12 @@
     "scripts": {
         "test": "cat logo.txt && lerna run test --parallel",
         "test:watch": "lerna run test --parallel -- --collect-coverage=false --watch",
-        "release": "cat logo.txt && lerna version --conventional-commits --yes",
+        "release": "cat logo.txt && lerna version --conventional-commits --yes --no-push",
         "bootstrap": "cat logo.txt && lerna bootstrap",
         "build": "cat logo.txt && lerna run build",
         "storybook": "cat logo.txt && lerna run storybook --parallel",
         "lint": "cat logo.txt && lerna run lint --parallel",
-        "publish:npm": "cat logo.txt && lerna publish from-git"
+        "publish:npm": "cat logo.txt && yarn build && lerna publish from-git"
     },
     "dependencies": {
         "lodash-es": "^4.17.21",
