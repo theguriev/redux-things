@@ -101,8 +101,8 @@ export const useThing = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const internalReducer = useCallback(
         flow(
-            partialRight(thingReducer, { toType }),
-            partialRight(reducer, { toType })
+            partialRight(reducer, { toType }),
+            partialRight(thingReducer, { toType })
         ), [reducer, toType]
     )
     const launch = useCallback(
