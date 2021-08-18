@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.9](https://github.com/theguriev/redux-things/compare/v1.11.8...v1.11.9) (2021-08-18)
+
+
+### Bug Fixes
+
+* **core:** changes thingsReducer and reducer order ([8a547ee](https://github.com/theguriev/redux-things/commit/8a547eee1e64379bf770d08e77d187b219198db6))
+
+
+
+
+
 ## [1.11.8](https://github.com/theguriev/redux-things/compare/v1.11.7...v1.11.8) (2021-08-18)
 
 
