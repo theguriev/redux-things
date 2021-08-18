@@ -59,11 +59,7 @@
     },
     "dependencies": {
         "@cryptic-css/core": "^5.0.3",
-<<<<<<< HEAD
-        "@redux-things/core": "^1.11.6",
-=======
         "@redux-things/core": "^1.11.7",
->>>>>>> feat/getFetchMoreRefactoring
         "@you-eye/styled": "^5.0.3",
         "styled-components": "^5.3.0"
     },
