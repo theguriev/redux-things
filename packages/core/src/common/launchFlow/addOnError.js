@@ -3,6 +3,9 @@ const converErrorToObject = error => ({
     message: error.message,
     name: error.name
 })
+
+const isError = candidate => candidate instanceof Error || candidate?.constructor?.name.includes('Error')
+
 export default ({
     actions: {
         error
@@ -16,7 +19,7 @@ export default ({
 }) => ({
     onError: errorObject => {
         const payload = (
-            errorObject instanceof Error ? converErrorToObject(errorObject) : errorObject
+            isError(errorObject) ? converErrorToObject(errorObject) : errorObject
         )
         const action = error({
             payload,
