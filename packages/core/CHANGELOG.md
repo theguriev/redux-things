@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.6](https://github.com/theguriev/redux-things/compare/v1.11.5...v1.11.6) (2021-08-18)
+
+
+### Bug Fixes
+
+* **core:** swallowed errors ([1931f0d](https://github.com/theguriev/redux-things/commit/1931f0d1aefc447d30a17cbae12216c089f1dd59))
+
+
+
+
+
 ## [1.11.4](https://github.com/theguriev/redux-things/compare/v1.11.3...v1.11.4) (2021-08-12)
 
 
