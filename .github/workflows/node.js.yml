@@ -8,6 +8,8 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+env:
+  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 jobs:
   build:
@@ -47,10 +49,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: yarn bootstrap
     - run: yarn build
-    - run: yarn update:docs
+    - run: chmod +x "${GITHUB_WORKSPACE}/.github/updateDocs.sh" && "${GITHUB_WORKSPACE}/.github/updateDocs.sh"
     - run: yarn release
     - run: yarn publish:npm
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-    
 
