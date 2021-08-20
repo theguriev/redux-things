@@ -101,8 +101,8 @@ export const useThing = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const internalReducer = useCallback(
         flow(
-            partialRight(reducer, { toType }),
-            partialRight(thingReducer, { toType })
+            partialRight(reducer, { toType, key }),
+            partialRight(thingReducer, { toType, key })
         ), [reducer, toType]
     )
     const launch = useCallback(
@@ -207,7 +207,7 @@ export const useThing = (
     }, [skip, error, isLoading, options, _cache, launch])
 
     const raw = data || initialDataFn(options)
-    const mappedData = dataMapper(raw, { isLoading, isRefetching, isInitial })
+    const mappedData = dataMapper(raw, { isLoading, isRefetching, isInitial, options })
     const refetchIntervalFn = () => {
         if (hasFocus || refetchIntervalInBackground) {
             refetch()

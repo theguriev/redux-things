@@ -1,10 +1,11 @@
 export default ({
-    fetchFn, options, dispatch, getState, extra
+    fetchFn, options, dispatch, getState, extra, key
 }) => ({
     promiseFn: () => fetchFn({
         options,
         dispatch,
         getState,
-        extra
+        extra,
+        key
     })
 })
