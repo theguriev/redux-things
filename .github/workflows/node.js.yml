@@ -47,9 +47,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: yarn bootstrap
     - run: yarn build
-    - run: |
-      chmod +x "${GITHUB_WORKSPACE}/.github/updateDocs.sh"
-      "${GITHUB_WORKSPACE}/.github/updateDocs.sh"
+    - run: chmod +x "${GITHUB_WORKSPACE}/.github/updateDocs.sh" && "${GITHUB_WORKSPACE}/.github/updateDocs.sh"
     - run: yarn release
     - run: yarn publish:npm
       env:
