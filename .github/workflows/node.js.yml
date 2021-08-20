@@ -47,6 +47,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: yarn bootstrap
     - run: yarn build
+    - run: yarn update:docs
     - run: yarn release
     - run: yarn publish:npm
       env:
