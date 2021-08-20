@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.11.10 (2021-08-20)
+
+**Note:** Version bump only for package @redux-things/mocks
+
+
+
+
+
 # [1.10.0](https://github.com/theguriev/redux-things/compare/v1.9.0...v1.10.0) (2021-06-21)
 
 

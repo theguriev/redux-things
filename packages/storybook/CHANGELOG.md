@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.11.10 (2021-08-20)
+
+**Note:** Version bump only for package @redux-things/storybook
+
+
+
+
+
 ## [1.11.9](https://github.com/theguriev/redux-things/compare/v1.11.8...v1.11.9) (2021-08-18)
 
 **Note:** Version bump only for package @redux-things/storybook
