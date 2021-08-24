@@ -13,6 +13,7 @@
         "release": "cat logo.txt && lerna version --conventional-commits --yes",
         "bootstrap": "cat logo.txt && lerna bootstrap",
         "build": "cat logo.txt && lerna run build",
+        "watch": "cat logo.txt && lerna run watch --parallel",
         "storybook": "cat logo.txt && lerna run storybook --parallel",
         "lint": "cat logo.txt && lerna run lint --parallel",
         "publish:npm": "cat logo.txt && lerna publish from-git --yes"
