@@ -60,7 +60,7 @@ export const useThing = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const toType = useCallback(
         partial(implode, delimiter, namespace, key),
-        [delimiter, namespace]
+        [delimiter, namespace, key]
     )
     const actions = useMemo(() => createLaunchFlowActions(toType), [toType])
     const { hasFocus, isFirstTime } = useWindowFocus(!refetchOnWindowFocus)
