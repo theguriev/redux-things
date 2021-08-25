@@ -32,7 +32,7 @@ import { useThingContext } from '../useThingContext'
 import { useCompareEffect } from '../useCompareEffect'
 
 export const useThing = (
-    key,
+    externalKey,
     fetchFn,
     hookOptions = {}
 ) => {
@@ -57,6 +57,7 @@ export const useThing = (
         debounceInterval,
         ...extra
     } = useThingContext(hookOptions)
+    const [key, setKey] = useState(externalKey)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const toType = useCallback(
         partial(implode, delimiter, namespace, key),
@@ -77,7 +78,6 @@ export const useThing = (
         isRefetching: false,
         isLoading: cache === 'no-cache',
         error: null,
-        requestPromise: null,
         cache,
         options: fetchMoreOptions || externalOptions,
         skip: externalSkip
@@ -186,10 +186,6 @@ export const useThing = (
         [debounceInterval, setState]
     )
 
-    useEffect(() => {
-        setDebounceState({ skip: externalSkip })
-    }, [externalSkip, setDebounceState])
-
     useCompareEffect(() => {
         if (externalOptions) {
             setDebounceState({
@@ -207,7 +203,15 @@ export const useThing = (
     }, [skip, error, isLoading, options, _cache, launch])
 
     const raw = data || initialDataFn(options)
-    const mappedData = dataMapper(raw, { isLoading, isRefetching, isInitial, options })
+    const mappedData = dataMapper(
+        raw,
+        {
+            isLoading,
+            isRefetching,
+            isInitial,
+            options
+        }
+    )
     const refetchIntervalFn = () => {
         if (hasFocus || refetchIntervalInBackground) {
             refetch()
@@ -223,6 +227,10 @@ export const useThing = (
             refetch()
         }
     }, [hasFocus, refetchOnWindowFocus, isFirstTime, refetch])
+
+    useEffect(() => {
+        setKey(externalKey)
+    }, [externalKey])
 
     return {
         error,
