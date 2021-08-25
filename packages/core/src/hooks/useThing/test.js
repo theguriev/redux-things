@@ -211,7 +211,8 @@ describe('useThing', () => {
     })
 
     test('debounce options changing', async () => {
-        const debounceInterval = 5
+        jest.useFakeTimers('modern')
+        const debounceInterval = 1000
         const callback = jest.fn().mockImplementation(({ options }) => Promise.resolve(options))
         const { result, rerender, waitForValueToChange } = renderHook(
             props => useThing(
@@ -267,8 +268,10 @@ describe('useThing', () => {
                 count: 4
             }
         })
-        await waitForValueToChange(() => result.current)
+        act(() => jest.runAllTimers())
+        await waitForValueToChange(() => result.current.isLoading)
         expect(callback).toHaveBeenCalledTimes(2)
         expect(result.current.data.count).toBe(4)
+        jest.useRealTimers()
     })
 })
