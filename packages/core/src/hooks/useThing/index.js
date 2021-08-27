@@ -158,7 +158,7 @@ export const useThing = (
 
     const fetchMore = useCallback(
         newOptions => {
-            if (canFetchMore === false) {
+            if (canFetchMore === false && !newOptions) {
                 return Promise.resolve()
             }
             return launch(newOptions || fetchMoreOptions)
