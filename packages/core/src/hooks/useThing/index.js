@@ -195,6 +195,10 @@ export const useThing = (
     }, [externalOptions, setDebounceState], isEqual)
 
     useEffect(() => {
+        setDebounceState({ skip: externalSkip })
+    }, [externalSkip, setDebounceState])
+
+    useEffect(() => {
         if (!error && !skip && (!isLoading || _cache === 'no-cache') && !data) {
             launch(options)
         }
