@@ -1,6 +1,6 @@
 {
     "name": "@redux-things/mocks",
-    "version": "1.11.14",
+    "version": "1.11.15",
     "description": "A library that allows you to quickly and easily synchronize your store with the server.",
     "keywords": [
         "redux",
