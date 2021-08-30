@@ -194,6 +194,9 @@ export const useThing = (
         }
     }, [externalOptions, setDebounceState], isEqual)
 
+    // We should update skip in the regular react loop
+    // It can't be simple static change because then
+    // You'll have a prbolems with sequence of options, skip updates
     useEffect(() => {
         setDebounceState({ skip: externalSkip })
     }, [externalSkip, setDebounceState])
