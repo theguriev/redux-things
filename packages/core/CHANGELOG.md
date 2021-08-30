@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.11.16 (2021-08-30)
+
+**Note:** Version bump only for package @redux-things/core
+
+
+
+
+
 ## 1.11.15 (2021-08-30)
 
 **Note:** Version bump only for package @redux-things/core

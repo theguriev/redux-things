@@ -1,6 +1,6 @@
 {
   "name": "@redux-things/dumb",
-  "version": "1.11.15",
+  "version": "1.11.16",
   "description": "A bunch of dumb function to simplify working with data",
   "keywords": [
     "dumb",
