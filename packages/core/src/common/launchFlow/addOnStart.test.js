@@ -9,6 +9,7 @@ describe('addOnStart', () => {
     test('add onStart option', async () => {
         dispatch.clear()
         let onStartHasBeenCalled = false
+        setState({ initial: true, error: { hello: 'world' } })
         const { onStart } = addOnStart({
             actions,
             hash: 'hash',
