@@ -35,7 +35,7 @@ export const promiseCache = ({
     cache.set(hash, promise)
     return promise
         .then(flow(onSuccess, removePromiseFromCache(hash)))
-        .catch(onError)
+        .catch(flow(onError, removePromiseFromCache(hash)))
 }
 
 /**
