@@ -12,6 +12,7 @@ Array [
 
 exports[`addOnStart add onStart option 2`] = `
 Object {
+  "error": null,
   "initial": true,
   "isLoading": true,
   "isRefetching": false,

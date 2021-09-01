@@ -17,6 +17,7 @@ export default ({
         dispatch(action)
         setState(state => ({
             ...state,
+            error: null,
             isLoading: true,
             isRefetching: !!options?.isRefetch
         }))
