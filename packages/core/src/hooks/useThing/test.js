@@ -274,4 +274,31 @@ describe('useThing', () => {
         expect(result.current.data.count).toBe(4)
         jest.useRealTimers()
     })
+
+    test('object reducer', async () => {
+        const { result, waitForValueToChange } = renderHook(
+            () => useThing(
+                'TObjectReducer',
+                () => Promise.resolve('hello world'),
+                {
+                    reducer: {
+                        dictionary: {
+                            fulfilled: (state, { payload }) => ({
+                                ...state,
+                                data: {
+                                    hello: payload
+                                }
+                            })
+                        }
+                    }
+                }
+            ),
+            { wrapper },
+            {
+                options: { helloWorld: true }
+            }
+        )
+        await waitForValueToChange(() => result.current.isLoading)
+        expect(result.current.data.hello).toBe('hello world')
+    })
 })
