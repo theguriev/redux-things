@@ -36,7 +36,7 @@ export const useWindowFocus = (skip = false) => {
             document.removeEventListener(EVENT_NAME, handleFocus)
             document.removeEventListener('focus', handleFocus)
         }
-    }, [])
+    }, [skip])
 
     return state
 }

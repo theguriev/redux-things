@@ -28,6 +28,7 @@ export const useMutation = (
         { isLoading, error, onSuccessData },
         setState
     ] = useState({ error: null, isLoading: false, onSuccessData: null })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const toType = useCallback(
         partial(implode, delimiter, namespace, mutationKey),
         [delimiter, namespace, mutationKey]

@@ -1,20 +1,64 @@
+import { toPairs, fromPairs, isFunction } from 'lodash-es'
+import { flow, createReducer, createActions } from '@redux-things/dumb'
+
 export const Types = {
     Pending: 'pending',
     Fulfilled: 'fulfilled',
     Error: 'error'
 }
 
-export const thingReducer = (
-    state,
-    { type, fetchMoreOptions, canFetchMore },
-    { toType }
-) => {
-    if (type === toType(Types.Fulfilled)) {
-        return {
-            ...state,
-            fetchMoreOptions,
-            canFetchMore
-        }
+export const fetchMoreReducer = (
+    state = {},
+    { fetchMoreOptions, canFetchMore }
+) => ({
+    ...state,
+    fetchMoreOptions,
+    canFetchMore
+})
+
+const addFetchMoreReducer = fn => {
+    if (Array.isArray(fn)) {
+        return [
+            ...fn,
+            ({ state, action, ...rest }) => ({
+                ...rest,
+                action,
+                state: fetchMoreReducer(state, action)
+            })
+        ]
     }
-    return state || {}
+    return flow(fn, fetchMoreReducer)
+}
+
+const prepareTypesAndFulfilled = toType => pairs => pairs.map(
+    ([type, fn]) => {
+        if (type === Types.Fulfilled) {
+            return [
+                toType(type),
+                addFetchMoreReducer(fn)
+            ]
+        }
+        return [toType(type), fn]
+    }
+)
+
+export const convertObjectToReducer = (obj, toType) => createReducer(
+    flow(
+        toPairs,
+        prepareTypesAndFulfilled(toType),
+        fromPairs
+    )(obj?.dictionary || {}),
+    obj?.initialState || {}
+)
+
+export const converObjectToActions = (obj, toType) => createActions(
+    Object.keys((obj?.dictionary || {})),
+    toType
+)
+
+export const getActionsFromObjectReducer = (reducer, toType) => {
+    if (isFunction(reducer)) {
+        return {}
+    }
+    return converObjectToActions(reducer, toType)
 }

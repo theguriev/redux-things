@@ -8,6 +8,7 @@ import {
     partialRight,
     partial,
     isEqual,
+    isFunction,
     debounce
 } from 'lodash-es'
 import { useSelector, useStore } from 'react-redux'
@@ -23,7 +24,9 @@ import {
     createLaunchFlowActions
 } from '@/common'
 import {
-    thingReducer
+    convertObjectToReducer,
+    getActionsFromObjectReducer,
+    fetchMoreReducer
 } from './utils'
 import { useInjectReducer } from '../useInjectReducer'
 import { useMounted } from '../useMounted'
@@ -63,7 +66,6 @@ export const useThing = (
         partial(implode, delimiter, namespace, key),
         [delimiter, namespace, key]
     )
-    const actions = useMemo(() => createLaunchFlowActions(toType), [toType])
     const { hasFocus, isFirstTime } = useWindowFocus(!refetchOnWindowFocus)
     const canFetchMore = useSelector(state => !!state?.[key]?.canFetchMore)
     const fetchMoreOptions = useSelector(state => state?.[key]?.fetchMoreOptions)
@@ -99,12 +101,25 @@ export const useThing = (
     const isInitial = data === null
     const mountedRef = useMounted()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const internalReducer = useCallback(
-        flow(
-            partialRight(reducer, { toType, key }),
-            partialRight(thingReducer, { toType, key })
-        ), [reducer, toType]
+    const internalReducer = useMemo(
+        () => {
+            if (isFunction(reducer)) {
+                return flow(
+                    partialRight(reducer, { toType, key }),
+                    partialRight(fetchMoreReducer, { toType, key })
+                )
+            }
+            return partialRight(convertObjectToReducer(reducer, toType), { toType, key })
+        }, [key, reducer, toType]
     )
+    const actions = useMemo(
+        () => ({
+            ...createLaunchFlowActions(toType),
+            ...getActionsFromObjectReducer(reducer, toType)
+        }),
+        [reducer, toType]
+    )
+
     const launch = useCallback(
         launchOptions => promiseCache(
             launchFlow({

@@ -274,4 +274,67 @@ describe('useThing', () => {
         expect(result.current.data.count).toBe(4)
         jest.useRealTimers()
     })
+
+    test('object reducer', async () => {
+        const { result, waitForValueToChange } = renderHook(
+            () => useThing(
+                'TObjectReducer',
+                () => Promise.resolve('hello world'),
+                {
+                    reducer: {
+                        dictionary: {
+                            fulfilled: (state, { payload }) => ({
+                                ...state,
+                                data: {
+                                    hello: payload
+                                }
+                            })
+                        }
+                    }
+                }
+            ),
+            { wrapper },
+            {
+                options: { helloWorld: true }
+            }
+        )
+        await waitForValueToChange(() => result.current.isLoading)
+        expect(result.current.data.hello).toBe('hello world')
+    })
+
+    test('extend actions in return', async () => {
+        const { result, waitForValueToChange } = renderHook(
+            () => useThing(
+                'TActions',
+                () => Promise.resolve('hello world'),
+                {
+                    reducer: {
+                        dictionary: {
+                            fulfilled: (state, { payload }) => ({
+                                ...state,
+                                data: {
+                                    hello: payload
+                                }
+                            }),
+                            additionalAction: state => ({
+                                ...state,
+                                data: {
+                                    hello: 'additional action'
+                                }
+                            })
+                        }
+                    }
+                }
+            ),
+            { wrapper },
+            {
+                options: { helloWorld: true }
+            }
+        )
+        await waitForValueToChange(() => result.current.isLoading)
+        expect(result.current.actions.pending).toBeInstanceOf(Function)
+        expect(result.current.actions.fulfilled).toBeInstanceOf(Function)
+        expect(result.current.actions.error).toBeInstanceOf(Function)
+        expect(result.current.actions.additionalAction).toBeInstanceOf(Function)
+    })
 })
