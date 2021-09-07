@@ -1,4 +1,4 @@
-import { toPairs, fromPairs, partialRight, isFunction } from 'lodash-es'
+import { toPairs, fromPairs, isFunction } from 'lodash-es'
 import { flow, createReducer, createActions } from '@redux-things/dumb'
 
 export const Types = {

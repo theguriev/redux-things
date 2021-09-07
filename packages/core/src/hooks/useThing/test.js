@@ -316,7 +316,7 @@ describe('useThing', () => {
                                     hello: payload
                                 }
                             }),
-                            additionalAction: (state) => ({
+                            additionalAction: state => ({
                                 ...state,
                                 data: {
                                     hello: 'additional action'
