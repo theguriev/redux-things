@@ -16,6 +16,17 @@ export const fetchMoreReducer = (
     canFetchMore
 })
 
+export const fetchMoreWithTypeCheckingReducer = (
+    state,
+    action,
+    { toType }
+) => {
+    if (action.type === toType(Types.Fulfilled)) {
+        return fetchMoreReducer(state, action)
+    }
+    return state
+}
+
 const addFetchMoreReducer = fn => {
     if (Array.isArray(fn)) {
         return [
