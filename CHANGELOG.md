@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.11.20 (2021-09-28)
+
+**Note:** Version bump only for package redux-things
+
+
+
+
+
 ## 1.11.19 (2021-09-07)
 
 **Note:** Version bump only for package redux-things
