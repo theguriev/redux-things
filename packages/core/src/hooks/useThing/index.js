@@ -26,7 +26,7 @@ import {
 import {
     convertObjectToReducer,
     getActionsFromObjectReducer,
-    fetchMoreReducer
+    fetchMoreWithTypeCheckingReducer
 } from './utils'
 import { useInjectReducer } from '../useInjectReducer'
 import { useMounted } from '../useMounted'
@@ -106,7 +106,7 @@ export const useThing = (
             if (isFunction(reducer)) {
                 return flow(
                     partialRight(reducer, { toType, key }),
-                    partialRight(fetchMoreReducer, { toType, key })
+                    partialRight(fetchMoreWithTypeCheckingReducer, { toType, key })
                 )
             }
             return partialRight(convertObjectToReducer(reducer, toType), { toType, key })
