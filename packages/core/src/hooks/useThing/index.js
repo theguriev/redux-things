@@ -34,6 +34,107 @@ import { useWindowFocus } from '../useWindowFocus'
 import { useThingContext } from '../useThingContext'
 import { useCompareEffect } from '../useCompareEffect'
 
+/**
+ * @typedef {object} ThingOptions
+ * @property {Function} reducer
+ *      classical or object (toolkit like) redux reducer.
+ * @property {Function} selector
+ *      selector to select data from the store.
+ * @property {Function|unknown|null} initialData
+ *      if set, this value will be used as the initial data for the thing.
+ * @property {Function} getFetchMore
+ *      ({ payload, selectedData, options, hash }) => boolean | object - function to generate
+ *      fetch options to fetchMore function.
+ *          * When new data is received for this thing, this function receives last options,
+ *              last fetch result of the infinite list of data and the full array of all chunks.
+ *          * Return `false` to indicate there is no next page available.
+ * @property {Function} dataMapper
+ *      data mapper function. It will prepare your data before showing it somewhere.
+ *      Use *mappedData* as a result of dataMapper.
+ *          * `skip: boolean`
+ *              * Set this to **true** to disable this thing from automatically running.
+ *              * Can be used for dependent entities.
+ *          * `cache: string`
+ *              * 'no-cache' - try to fetch on the first usage of the hook.
+ *              * 'cache-first' - get data from the cache and if there is not cache fetch it.
+ * @property {Record<string, unknown>} options
+ *      will be passed into fetch, fetchMore, refetch function and selector as a second argument.
+ *      Here should be only data which can be serialized otherwise redux will complain.
+ * @property {boolean} refetchOnWindowFocus
+ *      If set to true, the thing will refetch on window focus if the data is stale.
+ * @property {false|number} refetchInterval
+ *      If set to a number, all things will continuously refetch at this frequency in milliseconds.
+ * @property {boolean} reFetchIntervalInBackground
+ *      If set to true, things that are set to continuously refetch with a refetchInterval
+ *      will continue to refetch while their tab/window is in the background.
+ * @property {Function} onStart
+ *      will be fired when fetching will be launched.
+ * @property {Function} onSuccess
+ *      when promise will resolved.
+ * @property {Function} onError
+ *      when promise will rejected.
+ * @property {string} namespace
+ *      global actions namespace. Default: `@redux-things`
+ * @property {string} delimiter
+ *      type delimiter. Using for separate type, key and namespace.
+ *      Eample: @redux-things/TSomething/Fullfiled. Default: `/`
+ * @property {number} debounceInterval
+ *      changing options trigger debounce interval.
+ * @property {...Object} extra
+ *      anything you wanna pass to fetchFn. Usually, it's some API client or something like that.
+ */
+
+/**
+ * @typedef {object} ThingReturn
+ * @property {boolean} isError
+ *      has some errors or not.
+ * @property {boolean} isLoading
+ *      true if the thing is currently fetching.
+ * @property {boolean} isRefetching
+ *      true if the thing is currently refetching.
+ * @property {boolean} isInitial
+ *      true if the data is in initial state.
+ * @property {unknown} error
+ *      the error object or string.
+ * @property {null|unknown} data
+ *      * Defaults to `null`.
+ *      * The last successfully resolved data for the thing.
+ * @property {nul|unknown} mappedData
+ *      prepared ( by dataMapper option ) data.
+ * @property {Function} refetch
+ *      a function to manually refetch the thing.
+ * @property {Function} fetchMore
+ *      a function to manually fetchMore the thing with additional request options. Example:
+ *      ```js
+ *          fetchMore({ offset: 10, limit: 10 }).then(res => console.log)
+ *          // or
+ *          fetchMore()
+ *      ```
+ * @property {Function} preFetch
+ *      a function to manually prefetch the thing.
+ * @property {boolean} canFetchMore
+ *      the result of getFetchMore function.
+ * @property {Function} toType
+ *      a function to generate type based on string.
+ *      Example: toType('something') === `${namespace}/${key}/something`
+ * @property {Record<string, Function>} actions
+ *      * `pending: Function` - pending action creator function.
+ *      * `fulfilled: Function` - fulfilled action creator function.
+ *      * `error: Function` - error action creator function.
+ *      * ...extraActions - all extra actions what was added with object reducer.
+ */
+
+/**
+ * A thing is a declarative dependency on an asynchronous source of data that
+ * is tied to a unique key. A thing can be used with any Promise based method
+ * (including GET and POST methods) to fetch data from a server. If your method
+ * modifies data on the server, we recommend using Mutations instead.
+ *
+ * @param {string} externalKey a unique key for the thing.
+ * @param {*} fetchFn a function that returns a promise.
+ * @param {ThingOptions} hookOptions hook options.
+ * @returns {ThingReturn}
+ */
 export const useThing = (
     externalKey,
     fetchFn,
