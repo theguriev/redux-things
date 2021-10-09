@@ -199,7 +199,7 @@ export const useThing = (
         )
     )
     const data = _cache === 'no-cache' ? null : selectedData
-    const isInitial = data === null
+    const isInitial = data === null || data === undefined
     const mountedRef = useMounted()
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const internalReducer = useMemo(
