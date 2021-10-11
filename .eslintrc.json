@@ -4,11 +4,7 @@
         "es2021": true,
         "jest/globals": true
     },
-    "extends": [
-        "plugin:react/recommended",
-        "plugin:react-hooks/recommended",
-        "airbnb"
-    ],
+    "extends": ["plugin:react/recommended", "plugin:react-hooks/recommended", "airbnb", "prettier"],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -16,27 +12,12 @@
         "ecmaVersion": 12,
         "sourceType": "module"
     },
-    "plugins": [
-        "react",
-        "jest"
-    ],
+    "plugins": ["react", "jest"],
     "rules": {
-        "react/jsx-indent": [
-            2,
-            4
-        ],
-        "react/jsx-indent-props": [
-            2,
-            4
-        ],
-        "semi": [
-            2,
-            "never"
-        ],
-        "comma-dangle": [
-            2,
-            "never"
-        ],
+        "react/jsx-indent": [2, 4],
+        "react/jsx-indent-props": [2, 4],
+        "semi": [2, "never"],
+        "comma-dangle": [2, "never"],
         "indent": ["error", 4],
         "arrow-parens": ["error", "as-needed"],
         "import/no-unresolved": 0,
